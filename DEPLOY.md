@@ -58,7 +58,7 @@ A workflow is included at `.github/workflows/deploy-pages.yml`.
 ## Option 5 — Run locally (and on your phone, same Wi-Fi)
 
 ```bash
-python deploy/serve.py --lan
+python tools/serve_deploy.py --lan
 ```
 
 - Desktop: `http://localhost:8080/`

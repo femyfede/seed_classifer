@@ -1,4 +1,4 @@
 @echo off
-REM Serve the app from this folder on http://localhost:8080/
-cd /d "%~dp0"
-python serve.py
+REM Serve the Seed Classifier app from the deploy folder on http://localhost:8080/
+cd /d "%~dp0.."
+python tools\serve_deploy.py

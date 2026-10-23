@@ -131,7 +131,7 @@ caching:
 
 ```bash
 # from the repo root
-python deploy/serve.py
+python tools/serve_deploy.py
 # or on Windows: double-click serve.bat
 ```
 
@@ -139,8 +139,8 @@ Then open <http://localhost:8080/>. Add `?debug=1` to reveal raw logits and the
 class mapping.
 
 > If you see *"no available backend found"* or *"Model failed to load"*, you are
-> almost certainly opening the file directly instead of via `serve.py`, or your
-> server is sending `.mjs`/`.wasm` with the wrong MIME type. Use `serve.py`.
+> almost certainly opening the file directly instead of via `serve_deploy.py`, or your
+> server is sending `.mjs`/`.wasm` with the wrong MIME type. Use `serve_deploy.py`.
 
 ## Preprocessing parity test
 

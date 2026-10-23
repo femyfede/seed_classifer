@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Local server for the Maize Seed Classifier web app.
+"""Local server for the Seed Classifier web app.
 
-Serves this folder over HTTP with the MIME types the browser needs for
+Serves the deploy folder over HTTP with the MIME types the browser needs for
 WebAssembly and ES modules, and disables caching so you always get the latest
 files. Camera access and `fetch()` of the model require an http:// origin, so
 opening `index.html` directly (file://) will not work.
 
 Usage:
-    python serve.py                 # http://localhost:8080/
-    python serve.py --port 8000
-    python serve.py --no-browser
+    python tools/serve_deploy.py                 # http://localhost:8080/
+    python tools/serve_deploy.py --port 8000
+    python tools/serve_deploy.py --no-browser
 """
 
 from __future__ import annotations
@@ -23,7 +23,8 @@ import socketserver
 import threading
 import webbrowser
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPLOY = os.path.join(ROOT, "deploy")
 
 
 def lan_ip() -> str:
@@ -70,7 +71,7 @@ def main() -> None:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--lan", action="store_true",
                         help="Bind to 0.0.0.0 so phones on the same Wi-Fi can connect.")
-    parser.add_argument("--directory", default=HERE)
+    parser.add_argument("--directory", default=DEPLOY)
     parser.add_argument("--no-browser", action="store_true")
     args = parser.parse_args()
 
