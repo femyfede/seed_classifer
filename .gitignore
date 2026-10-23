@@ -1,0 +1,26 @@
+# Local data and downloaded archives
+/data_maize/
+/data_maize_extracted/
+/data_maize.zip
+/*.zip
+
+# Dependencies and generated builds
+/node_modules/
+/android/.gradle/
+/android/local.properties
+/android/app/build/
+/android/app/src/main/assets/public/
+/android/app/src/main/assets/capacitor.config.json
+/android/app/src/main/assets/capacitor.plugins.json
+/android/capacitor-cordova-android-plugins/
+/SeedClass/.pio/
+/SeedClass/.vscode/
+__pycache__/
+*.py[cod]
+
+# Local logs, editor, and browser artifacts
+/train2.err
+/train2.log
+/.playwright-mcp/
+.DS_Store
+Thumbs.db

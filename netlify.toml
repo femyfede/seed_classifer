@@ -1,0 +1,41 @@
+[build]
+  publish = "deploy"
+  command = ""
+
+# Static app: no build step. Correct MIME + safe caching.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml"
+
+[[headers]]
+  for = "/*.json"
+  [headers.values]
+    Content-Type = "application/json"
+
+[[headers]]
+  for = "/*.onnx"
+  [headers.values]
+    Content-Type = "application/octet-stream"

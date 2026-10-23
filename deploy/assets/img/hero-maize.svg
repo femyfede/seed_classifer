@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 620" role="img" aria-labelledby="heroTitle">
+  <title id="heroTitle">Illustration of a maize cob growing in a Tanzanian field</title>
+  <defs>
+    <linearGradient id="cobBase" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4D185"/>
+      <stop offset=".5" stop-color="#E7B85A"/>
+      <stop offset="1" stop-color="#C89236"/>
+    </linearGradient>
+    <linearGradient id="huskA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#87B486"/>
+      <stop offset="1" stop-color="#477A4D"/>
+    </linearGradient>
+    <linearGradient id="huskB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A9C9A0"/>
+      <stop offset="1" stop-color="#5E8F60"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5E8F60" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#183F32" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#F4D185" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#F4D185" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="kernels" width="22" height="24" patternUnits="userSpaceOnUse">
+      <rect width="22" height="24" fill="#D9A441"/>
+      <ellipse cx="11" cy="12" rx="7.2" ry="8.6" fill="#F3CC7D"/>
+      <ellipse cx="11" cy="10.5" rx="4.8" ry="5.9" fill="#FBE3A6" opacity=".55"/>
+    </pattern>
+    <pattern id="kernelsAlt" width="22" height="24" patternUnits="userSpaceOnUse" patternTransform="translate(11 12)">
+      <ellipse cx="11" cy="12" rx="7.2" ry="8.6" fill="#E9BA61"/>
+      <ellipse cx="11" cy="10.5" rx="4.8" ry="5.9" fill="#F6D58B" opacity=".5"/>
+    </pattern>
+    <clipPath id="cobClip">
+      <path d="M0-206C28-206 62-176 78-120c18 66 12 146-14 206-12 27-36 50-64 64-28-14-52-37-64-64-26-60-32-140-14-206C-62-176-28-206 0-206Z"/>
+    </clipPath>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0B241B" flood-opacity=".28"/>
+    </filter>
+  </defs>
+
+  <circle cx="566" cy="166" r="188" fill="url(#sunGlow)"/>
+  <circle cx="566" cy="166" r="63" fill="#F4D185" opacity=".16"/>
+  <circle cx="566" cy="166" r="39" fill="#F4D185" opacity=".28"/>
+
+  <path d="M-50 514c92-106 198-158 321-158 130 0 260 56 366 158 42 41 89 78 141 111H-82c28-39 58-77 78-111Z" fill="#E5EDE0" opacity=".08"/>
+  <path d="M-40 554c100-104 210-154 334-154 126 0 251 52 366 154 34 30 71 56 110 80H-76c14-26 26-52 36-80Z" fill="url(#hill)"/>
+  <g stroke="#A9C9A0" stroke-width="2" stroke-linecap="round" opacity=".22">
+    <path d="M32 574c96-50 170-82 254-98"/>
+    <path d="M58 610c104-54 186-86 278-102"/>
+    <path d="M652 566c-80-50-150-80-224-96"/>
+    <path d="M682 606c-88-54-164-84-248-100"/>
+  </g>
+
+  <g fill="#8FB58C" opacity=".55">
+    <path d="M126 544c-16-35-15-65 4-92 16 27 21 57 14 90l-18 2Z"/>
+    <path d="M163 558c-26-28-37-57-31-88 27 20 43 47 48 81l-17 7Z"/>
+    <path d="M208 546c-6-37 4-66 30-87 7 30 2 60-14 89l-16-2Z"/>
+    <path d="M604 552c16-35 15-65-4-92-16 27-21 57-14 90l18 2Z"/>
+    <path d="M567 566c26-28 37-57 31-88-27 20-43 47-48 81l17 7Z"/>
+    <path d="M522 554c6-37-4-66-30-87-7 30-2 60 14 89l16-2Z"/>
+  </g>
+
+  <g transform="translate(398 294) rotate(14)" filter="url(#softShadow)">
+    <path d="M-104 42c-43 25-83 22-115-6 40-8 76-24 107-49l8 55Z" fill="url(#huskA)"/>
+    <path d="M-98 96c-45 7-80-7-106-42 42 2 79-7 111-28l-5 70Z" fill="url(#huskB)"/>
+    <path d="M-74 146c-33 24-67 29-101 13 30-13 56-33 77-61l24 48Z" fill="url(#huskA)"/>
+    <path d="M104 42c43 25 83 22 115-6-40-8-76-24-107-49l-8 55Z" fill="url(#huskA)"/>
+    <path d="M98 96c45 7 80-7 106-42-42 2-79-7-111-28l5 70Z" fill="url(#huskB)"/>
+    <path d="M74 146c33 24 67 29 101 13-30-13-56-33-77-61l-24 48Z" fill="url(#huskA)"/>
+    <path d="M0-206C28-206 62-176 78-120c18 66 12 146-14 206-12 27-36 50-64 64-28-14-52-37-64-64-26-60-32-140-14-206C-62-176-28-206 0-206Z" fill="url(#cobBase)"/>
+    <g clip-path="url(#cobClip)">
+      <rect x="-120" y="-220" width="240" height="460" fill="url(#kernels)"/>
+      <rect x="-120" y="-220" width="240" height="460" fill="url(#kernelsAlt)"/>
+      <ellipse cx="-64" cy="-40" rx="77" ry="248" fill="#FFF2C8" opacity=".12"/>
+      <ellipse cx="78" cy="20" rx="62" ry="238" fill="#8B5D1B" opacity=".13"/>
+      <path d="M-16-190c9 103 9 235 0 370" stroke="#B57E26" stroke-width="4" opacity=".35"/>
+    </g>
+    <path d="M-28-218c8-22 20-38 36-49 3 20-5 38-24 56l-12-7Z" fill="#D9A441"/>
+    <path d="M15-222c-3-20 2-37 15-51 8 18 5 36-7 56l-8-5Z" fill="#A9C9A0"/>
+  </g>
+
+  <g opacity=".92">
+    <path d="M565 378c-7-34 5-62 36-83 8 32 0 61-22 91l-14-8Z" fill="#A9C9A0"/>
+    <path d="M584 388c16-30 39-48 68-53-10 29-30 51-63 67l-5-14Z" fill="#8FB58C"/>
+  </g>
+  <g fill="#F4D185">
+    <ellipse cx="626" cy="386" rx="12" ry="17" transform="rotate(24 626 386)"/>
+    <ellipse cx="216" cy="404" rx="9" ry="13" transform="rotate(-18 216 404)" opacity=".7"/>
+    <ellipse cx="682" cy="450" rx="7" ry="10" transform="rotate(35 682 450)" opacity=".55"/>
+  </g>
+  <g stroke="#F8F7EF" stroke-width="1.6" stroke-linecap="round" opacity=".35">
+    <path d="M260 244c20-10 38-9 55 3"/>
+    <path d="M240 270c27-9 50-6 68 8"/>
+  </g>
+</svg>

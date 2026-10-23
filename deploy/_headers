@@ -1,0 +1,22 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.wasm
+  Content-Type: application/wasm
+
+/*.mjs
+  Content-Type: text/javascript
+
+/*.webmanifest
+  Content-Type: application/manifest+json
+
+/*.svg
+  Content-Type: image/svg+xml
+
+/*.json
+  Content-Type: application/json
+
+/*.onnx
+  Content-Type: application/octet-stream

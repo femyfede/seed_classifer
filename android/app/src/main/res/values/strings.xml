@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Seed Classifier</string>
+    <string name="title_activity_main">Seed Classifier</string>
+    <string name="package_name">com.seedyai.maizeclassifier</string>
+    <string name="custom_url_scheme">com.seedyai.maizeclassifier</string>
+</resources>

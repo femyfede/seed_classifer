@@ -1,0 +1,27 @@
+{
+  "name": "seedclassifer",
+  "version": "1.0.0",
+  "description": "Classify East African maize seed varieties from a photo. This project trains a small CNN in PyTorch, exports it to ONNX, and runs it fully offline in the browser. An ESP32-S3 firmware variant runs a quantised Edge Impulse model on-device.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tools/parity_test.js",
+    "android:add": "cap add android",
+    "android:sync": "cap sync android",
+    "android:open": "cap open android",
+    "ios:add": "cap add ios",
+    "ios:sync": "cap sync ios",
+    "ios:open": "cap open ios"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/ios": "^8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3"
+  }
+}

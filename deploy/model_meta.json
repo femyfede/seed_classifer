@@ -1,0 +1,77 @@
+{
+  "classes": [
+    "chotara",
+    "huria",
+    "local",
+    "other"
+  ],
+  "display_names": [
+    "Chotara",
+    "Huria",
+    "Asili",
+    "unrelated"
+  ],
+  "img_size": 64,
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "layout": "NCHW"
+  },
+  "group_aware_split": true,
+  "unique_seeds": {
+    "total": 6127,
+    "train": 7288,
+    "val": 613,
+    "test": 1226
+  },
+  "val_macro_f1": 0.7621286856850951,
+  "test_accuracy": 0.7610357583230579,
+  "per_class": {
+    "chotara": {
+      "precision": 0.5991228070175438,
+      "recall": 0.5793044953350297,
+      "f1-score": 0.5890470030185425,
+      "support": 1179.0
+    },
+    "huria": {
+      "precision": 0.4627659574468085,
+      "recall": 0.5548469387755102,
+      "f1-score": 0.5046403712296984,
+      "support": 784.0
+    },
+    "local": {
+      "precision": 0.9910141206675225,
+      "recall": 0.8654708520179372,
+      "f1-score": 0.9239976062238181,
+      "support": 892.0
+    },
+    "other": {
+      "precision": 1.0,
+      "recall": 0.9966666666666667,
+      "f1-score": 0.998330550918197,
+      "support": 1200.0
+    },
+    "accuracy": 0.7610357583230579,
+    "macro avg": {
+      "precision": 0.7632257212829687,
+      "recall": 0.7490722381987859,
+      "f1-score": 0.754003882847564,
+      "support": 4055.0
+    },
+    "weighted avg": {
+      "precision": 0.7775977548082398,
+      "recall": 0.7610357583230579,
+      "f1-score": 0.7675282351310548,
+      "support": 4055.0
+    }
+  },
+  "num_params": 767108
+}

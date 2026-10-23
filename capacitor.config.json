@@ -1,0 +1,8 @@
+{
+  "appId": "com.seedyai.maizeclassifier",
+  "appName": "Seed Classifier",
+  "webDir": "deploy",
+  "android": {
+    "allowMixedContent": false
+  }
+}

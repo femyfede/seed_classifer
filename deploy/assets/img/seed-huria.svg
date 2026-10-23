@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-labelledby="t">
+  <title id="t">Huria open-pollinated maize illustration</title>
+  <defs>
+    <linearGradient id="hBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E5EDE0"/>
+      <stop offset="1" stop-color="#F8F7EF"/>
+    </linearGradient>
+    <linearGradient id="hLeaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A9C9A0"/>
+      <stop offset="1" stop-color="#477A4D"/>
+    </linearGradient>
+    <linearGradient id="hSeed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8E2A9"/>
+      <stop offset=".6" stop-color="#E7B85A"/>
+      <stop offset="1" stop-color="#C08633"/>
+    </linearGradient>
+    <filter id="hShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#183F32" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="320" height="240" rx="28" fill="url(#hBg)"/>
+  <circle cx="252" cy="62" r="46" fill="#F4D185" opacity=".28"/>
+  <path d="M-20 210c59-37 118-50 178-40 62 10 112 35 182 74v16H-20v-50Z" fill="#D7E2D1"/>
+  <g filter="url(#hShadow)">
+    <path d="M118 178c-26-41-24-78 7-111 25 31 32 68 21 111l-28 0Z" fill="url(#hLeaf)"/>
+    <path d="M202 178c26-41 24-78-7-111-25 31-32 68-21 111l28 0Z" fill="url(#hLeaf)"/>
+    <path d="M160 52c15 0 29 18 34 47 5 30 2 64-9 89-5 12-15 21-25 26-10-5-20-14-25-26-11-25-14-59-9-89 5-29 19-47 34-47Z" fill="#D9A441"/>
+    <path d="M160 62c12 0 23 16 27 41 4 27 1 56-8 78-4 9-12 16-19 20-7-4-15-11-19-20-9-22-12-51-8-78 4-25 15-41 27-41Z" fill="#F4CE80"/>
+    <g fill="#E1AE4F">
+      <ellipse cx="148" cy="86" rx="5.5" ry="7"/>
+      <ellipse cx="160" cy="82" rx="5.5" ry="7"/>
+      <ellipse cx="172" cy="86" rx="5.5" ry="7"/>
+      <ellipse cx="144" cy="103" rx="5.5" ry="7"/>
+      <ellipse cx="157" cy="99" rx="5.5" ry="7"/>
+      <ellipse cx="170" cy="102" rx="5.5" ry="7"/>
+      <ellipse cx="181" cy="108" rx="5.5" ry="7"/>
+      <ellipse cx="148" cy="120" rx="5.5" ry="7"/>
+      <ellipse cx="161" cy="116" rx="5.5" ry="7"/>
+      <ellipse cx="174" cy="120" rx="5.5" ry="7"/>
+      <ellipse cx="153" cy="137" rx="5.5" ry="7"/>
+      <ellipse cx="166" cy="135" rx="5.5" ry="7"/>
+      <ellipse cx="159" cy="152" rx="5.5" ry="7"/>
+    </g>
+    <path d="M160 34c-1-10 3-18 11-24 3 10 0 18-7 26l-4-2Z" fill="#A9C9A0"/>
+  </g>
+  <g fill="url(#hSeed)">
+    <ellipse cx="82" cy="106" rx="12" ry="17" transform="rotate(-24 82 106)"/>
+    <ellipse cx="65" cy="138" rx="10" ry="14" transform="rotate(18 65 138)"/>
+    <ellipse cx="242" cy="126" rx="11" ry="16" transform="rotate(28 242 126)"/>
+    <ellipse cx="258" cy="153" rx="8" ry="12" transform="rotate(-14 258 153)"/>
+  </g>
+  <g stroke="#477A4D" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".45" stroke-dasharray="3 7">
+    <path d="M96 99c17 11 30 26 37 45"/>
+    <path d="M228 118c-15 13-27 29-32 47"/>
+  </g>
+  <g fill="#477A4D" opacity=".55">
+    <circle cx="111" cy="61" r="2.4"/>
+    <circle cx="130" cy="47" r="1.8"/>
+    <circle cx="207" cy="52" r="2.2"/>
+  </g>
+</svg>

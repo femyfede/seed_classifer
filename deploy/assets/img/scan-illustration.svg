@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="t">
+  <title id="t">Camera viewfinder scanning maize kernels</title>
+  <defs>
+    <linearGradient id="sBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E5EDE0"/>
+      <stop offset="1" stop-color="#F8F7EF"/>
+    </linearGradient>
+    <linearGradient id="sSeed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8E2A9"/>
+      <stop offset="1" stop-color="#C9903A"/>
+    </linearGradient>
+    <filter id="sShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#183F32" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="360" height="260" rx="30" fill="url(#sBg)"/>
+  <circle cx="296" cy="52" r="38" fill="#F4D185" opacity=".25"/>
+  <g filter="url(#sShadow)">
+    <rect x="76" y="48" width="208" height="164" rx="26" fill="#FFFFFF"/>
+    <rect x="92" y="64" width="176" height="132" rx="18" fill="#F1F5ED"/>
+    <path d="M92 196c46-32 94-43 142-33 13 3 24 7 34 13v20H92v-0Z" fill="#DDE7D7"/>
+  </g>
+  <g stroke="#183F32" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M84 76V60c0-7 5-12 12-12h22"/>
+    <path d="M240 48h22c7 0 12 5 12 12v18"/>
+    <path d="M274 184v18c0 7-5 12-12 12h-20"/>
+    <path d="M118 214H96c-7 0-12-5-12-12v-20"/>
+  </g>
+  <g fill="url(#sSeed)">
+    <ellipse cx="151" cy="128" rx="22" ry="32" transform="rotate(-19 151 128)"/>
+    <ellipse cx="191" cy="145" rx="18" ry="26" transform="rotate(20 191 145)"/>
+    <ellipse cx="214" cy="118" rx="14" ry="21" transform="rotate(-33 214 118)"/>
+  </g>
+  <g stroke="#B27A2A" stroke-width="2" stroke-linecap="round" opacity=".42" fill="none">
+    <path d="M143 110c5 12 5 24 0 35"/>
+    <path d="M184 130c4 9 3 18-1 26"/>
+  </g>
+  <path d="M92 130h-12M280 130h-12M180 64v-10M180 206v-10" stroke="#477A4D" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <g fill="#477A4D" opacity=".5">
+    <circle cx="55" cy="96" r="3"/>
+    <circle cx="313" cy="166" r="2.5"/>
+    <circle cx="62" cy="190" r="2"/>
+  </g>
+</svg>

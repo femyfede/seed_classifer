@@ -1,0 +1,60 @@
+{
+  "id": "./",
+  "name": "Seed Classifier — Maize Seed Identification and Growing Guide",
+  "short_name": "Seed Classifier",
+  "description": "Identify supported maize seed categories on your phone and explore growing guidance for Tanzania, online or offline.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#F8F7EF",
+  "theme_color": "#183F32",
+  "categories": ["agriculture", "education", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Scan maize seeds",
+      "short_name": "Scan",
+      "description": "Open the camera and identify a maize seed.",
+      "url": "./#scan",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Seed guide",
+      "short_name": "Guide",
+      "description": "Read seed and regional growing guidance.",
+      "url": "./#guide",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Growing guide for Tanzania",
+      "short_name": "Regions",
+      "description": "Choose a Tanzanian region.",
+      "url": "./#guide/regions",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

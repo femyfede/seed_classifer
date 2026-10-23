@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Seed Classifier — Maize Seed Identification and Growing Guide</title>
+  <meta name="description" content="Identify supported maize seed categories on your phone and explore practical growing guidance for Tanzania. Works offline after the app and model are downloaded.">
+  <meta name="theme-color" content="#183F32">
+  <meta name="color-scheme" content="light">
+  <meta name="application-name" content="Seed Classifier">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Seed Classifier">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skipToContent">Skip to content</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-4.75v-6.5h-5.5V21H4.5A1.5 1.5 0 0 1 3 19.5v-9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-guide" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4.5V10h5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h8.5M18 7h2M4 17h2M11.5 17H20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="15" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7.5h3l1.5-2h7l1.5 2h3A1.5 1.5 0 0 1 21.5 9v9A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="9.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4.5 17 5-5 3.5 3.5 2.5-2.5 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M4 9.5a12.5 12.5 0 0 1 16 0M7 13a8 8 0 0 1 10 0M10 16.5a3.5 3.5 0 0 1 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="20" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="m3 3 18 18M7.5 7.7A5.5 5.5 0 0 0 6 18.5h9.5a4.8 4.8 0 0 0 2.7-.8M9.2 5.4A6 6 0 0 1 18 9.8a4 4 0 0 1 2.5 7.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C12 4 5 7 5 14c0 3 2 5 5 5 7 0 10-7 10-15Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 21c3.5-6 8-9.5 13-12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.2 2.7 7.6 7 9.5 4.3-1.9 7-5.3 7-9.5V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-soil" viewBox="0 0 24 24"><path d="M3 17.5h18M5 13.5h14M7 9.5h10M4 21h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 3v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 6c-2.4 0-4-1.4-4-3.5C10.5 2.5 12 3.8 12 6Zm0 0c2.4 0 4-1.4 4-3.5C13.5 2.5 12 3.8 12 6Z" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-water" viewBox="0 0 24 24"><path d="M12 3c3.2 4.1 6 7.7 6 11a6 6 0 0 1-12 0c0-3.3 2.8-6.9 6-11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 15.2c.3 1.5 1.4 2.4 3 2.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-8M12 13c-4.5.2-7-2.4-7-6.5 4.2-.3 7 2.2 7 6.5Zm0 0c4.5.2 7-2.4 7-6.5-4.2-.3-7 2.2-7 6.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bug" viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="5" ry="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 9.5 7 7M15 9.5 17 7M3.5 12H7M17 12h3.5M4 17h3M17 17h3M9 20l-1.5 2M15 20l1.5 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-basket" viewBox="0 0 24 24"><path d="M4 10h16l-1.4 9a2 2 0 0 1-2 1.7H7.4a2 2 0 0 1-2-1.7L4 10Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10 10 4M16 10 14 4M9 14v3M12 14v3M15 14v3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.2 4.2 2.7 17.3A2 2 0 0 0 4.4 20h15.2a2 2 0 0 0 1.7-2.7L13.8 4.2a2 2 0 0 0-3.6 0Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9v4.5M12 16.8v.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6M12 7.5v.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m15.5 15.5 5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l.8 13h9.4l.8-13M10 11v5M14 11v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.2M20 4.5V11h-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4M4 16.5v2A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-switch" viewBox="0 0 24 24"><path d="M4 8.5A4.5 4.5 0 0 1 8.5 4H18m0 0-3-3m3 3-3 3M20 15.5a4.5 4.5 0 0 1-4.5 4.5H6m0 0 3 3m-3-3 3-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3c.7 4.6 3.4 7.3 8 8-4.6.7-7.3 3.4-8 8-.7-4.6-3.4-7.3-8-8 4.6-.7 7.3-3.4 8-8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="topbar" id="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#home" aria-label="Seed Classifier home">
+          <img class="brand-mark" src="./assets/img/logo-mark.svg" width="38" height="38" alt="">
+          <span class="brand-name">Seedy<span>AI</span></span>
+        </a>
+        <div class="topbar-actions">
+          <span class="conn-badge" id="connBadge" aria-live="polite">
+            <span class="dot"></span>
+            <span id="connBadgeText" data-i18n="online">Online</span>
+          </span>
+          <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">SW</button>
+          <button class="icon-button" id="settingsBtn" type="button" data-i18n-aria-label="openSettings" aria-label="Open settings">
+            <svg class="icon" aria-hidden="true"><use href="#i-settings"></use></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main" id="main" tabindex="-1">
+      <!-- HOME -->
+      <section class="screen" id="screen-home" data-screen="home" aria-labelledby="home-title">
+        <div class="home-hero">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">
+              <svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+              <span data-i18n="heroEyebrow">Maize seed intelligence</span>
+            </span>
+            <h1 class="hero-title" id="home-title" data-i18n="homeTitle">Choose the Right Maize Seed</h1>
+            <p class="hero-text" data-i18n="homeDescription">Identify the supported maize seed categories from a clear photo, then explore practical growing guidance for your region of Tanzania.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" id="heroScanBtn" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-scan"></use></svg>
+                <span data-i18n="scanSeeds">Scan Maize Seeds</span>
+              </button>
+              <button class="btn btn-on-dark btn-lg" id="heroGuideBtn" type="button">
+                <span data-i18n="exploreGuide">Explore Seed Guide</span>
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+              </button>
+            </div>
+            <div class="hero-foot">
+              <span class="hero-offline" id="homeOfflineBadge">
+                <span class="dot"></span>
+                <svg class="icon" aria-hidden="true" style="width:14px;height:14px"><use href="#i-cloud-off"></use></svg>
+                <span data-i18n="offlinePill">Works offline</span>
+              </span>
+              <span class="hero-local">
+                <svg class="icon" aria-hidden="true"><use href="#i-lock"></use></svg>
+                <span data-i18n="trustLocal">Photos stay on your phone. No image uploads.</span>
+              </span>
+            </div>
+          </div>
+          <div class="hero-art">
+            <img src="./assets/img/hero-maize.svg" width="760" height="620" alt="">
+          </div>
+        </div>
+
+        <div class="quick-stats" aria-label="Seed Classifier features">
+          <div class="stat">
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg></span>
+            <div><strong data-i18n="statOnDevice">On-device AI</strong><span data-i18n="statOnDeviceBody">Your photo is analysed locally.</span></div>
+          </div>
+          <div class="stat">
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+            <div><strong data-i18n="statClasses">4 categories</strong><span data-i18n="statClassesBody">Asili, Chotara, Huria and unrelated.</span></div>
+          </div>
+          <div class="stat">
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
+            <div><strong data-i18n="statOffline">Built for offline</strong><span data-i18n="statOfflineBody">Scan again without a network.</span></div>
+          </div>
+        </div>
+
+        <section class="home-section" aria-labelledby="how-title">
+          <div class="section-head">
+            <h2 id="how-title" data-i18n="howItWorks">How it works</h2>
+          </div>
+          <div class="steps-grid">
+            <article class="step-card">
+              <div class="step-num">1</div>
+              <h3 data-i18n="step1Title">Photograph a kernel</h3>
+              <p data-i18n="step1Body">Use one seed on a plain surface with even lighting.</p>
+            </article>
+            <article class="step-card">
+              <div class="step-num">2</div>
+              <h3 data-i18n="step2Title">Identify on device</h3>
+              <p data-i18n="step2Body">The AI model runs inside your browser.</p>
+            </article>
+            <article class="step-card">
+              <div class="step-num">3</div>
+              <h3 data-i18n="step3Title">Read local guidance</h3>
+              <p data-i18n="step3Body">Explore growing notes for Tanzanian conditions.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="home-section" aria-labelledby="types-title">
+          <div class="section-head">
+            <h2 id="types-title" data-i18n="exploreTypes">Explore seed types</h2>
+            <p data-i18n="exploreTypesBody">Each category is a broad seed group, not a guarantee of a specific variety or certification.</p>
+          </div>
+          <div class="category-grid" id="homeCategories"></div>
+        </section>
+
+        <section class="region-teaser" aria-labelledby="region-teaser-title">
+          <div>
+            <span class="eyebrow" data-i18n="guideRegions">Growing guide</span>
+            <h2 id="region-teaser-title" data-i18n="guideRegionTitle">Growing Guide for Tanzania</h2>
+            <p data-i18n="guideRegionBody">Choose your region for general soil, rainfall, seasonal and seed-selection guidance.</p>
+            <div class="quick-regions" id="homeQuickRegions"></div>
+          </div>
+          <div class="teaser-action">
+            <button class="btn btn-primary" id="homeRegionBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg>
+              <span data-i18n="openRegionGuide">Choose your region</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="install-card" id="homeInstallCard" hidden>
+          <span class="install-card-icon"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
+          <div class="install-card-body">
+            <h3 data-i18n="installTitle">Install Seed Classifier</h3>
+            <p data-i18n="installBody">Add Seed Classifier to your home screen for quick, full-screen access and offline use.</p>
+          </div>
+          <button class="btn btn-secondary" id="homeInstallBtn" type="button" data-i18n="installButton">Install app</button>
+        </section>
+
+        <p class="home-note" data-i18n="privacyNoteHome">Seed Classifier runs on your device. Scan history and photos stay in your browser unless you delete them.</p>
+      </section>
+
+      <!-- SCAN -->
+      <section class="screen" id="screen-scan" data-screen="scan" aria-labelledby="scan-title" hidden>
+        <header class="page-head">
+          <div class="page-head-row">
+            <div>
+              <span class="eyebrow" data-i18n="navScan">Scan</span>
+              <h1 class="page-title" id="scan-title" data-i18n="scanTitle">Scan maize seeds</h1>
+              <p class="page-sub" data-i18n="scanSubtitle">Photograph one maize kernel clearly. The model identifies the seed category on your device.</p>
+            </div>
+            <span class="status-pill" id="scanStatus" aria-live="polite">
+              <span class="dot"></span>
+              <span id="scanStatusText" data-i18n="modelLoading">Loading AI model…</span>
+            </span>
+          </div>
+        </header>
+
+        <div class="scan-layout">
+          <div class="scan-panel">
+            <div class="scan-stage" id="scanEmpty">
+              <div class="scan-intro">
+                <div class="scan-illustration">
+                  <img src="./assets/img/scan-illustration.svg" width="360" height="260" alt="">
+                </div>
+                <h2 class="stage-title" data-i18n="uploadTitle">Add a seed photo</h2>
+                <p class="stage-text" data-i18n="uploadBody">Take a photo now or choose one already saved on your phone.</p>
+              </div>
+              <div class="scan-actions">
+                <button class="btn btn-primary btn-lg" id="cameraStartBtn" type="button">
+                  <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>
+                  <span data-i18n="cameraStart">Use camera</span>
+                </button>
+                <button class="btn btn-secondary btn-lg" id="galleryBtn" type="button">
+                  <svg class="icon" aria-hidden="true"><use href="#i-image"></use></svg>
+                  <span data-i18n="gallery">Choose photo</span>
+                </button>
+              </div>
+              <p class="micro" data-i18n="dragDrop">You can also drag and drop an image here on a computer.</p>
+              <p class="micro" data-i18n="directCameraNote">Direct camera access needs HTTPS or localhost. You can always upload a photo instead.</p>
+              <input type="file" id="fileInput" accept="image/*" hidden>
+              <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+            </div>
+
+            <div class="scan-stage" id="scanCamera" hidden>
+              <div class="camera-frame" id="cameraFrame">
+                <video id="cameraVideo" playsinline muted autoplay aria-label="Camera preview"></video>
+                <div class="camera-guide" aria-hidden="true"></div>
+                <div class="camera-status" id="cameraStatus" data-i18n="cameraOpening">Opening camera…</div>
+              </div>
+              <p class="camera-hint" data-i18n="cameraHint">Place one kernel on a plain, contrasting surface. Fill most of the frame with the seed.</p>
+              <div class="scan-actions">
+                <button class="btn btn-primary btn-lg" id="captureBtn" type="button">
+                  <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>
+                  <span data-i18n="capturePhoto">Capture photo</span>
+                </button>
+                <button class="btn btn-secondary" id="switchCameraBtn" type="button">
+                  <svg class="icon" aria-hidden="true"><use href="#i-switch"></use></svg>
+                  <span data-i18n="switchCamera">Switch camera</span>
+                </button>
+                <button class="btn btn-quiet" id="closeCameraBtn" type="button" data-i18n="closeCamera">Close camera</button>
+              </div>
+              <div class="camera-error" id="cameraError" hidden>
+                <p id="cameraErrorText"></p>
+                <div class="scan-actions" style="justify-content:flex-start">
+                  <button class="btn btn-secondary" id="cameraRetryBtn" type="button" data-i18n="cameraRetry">Try camera again</button>
+                  <button class="btn btn-quiet" id="cameraUploadBtn" type="button" data-i18n="gallery">Choose photo</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="scan-stage" id="scanPreview" hidden>
+              <div class="preview-frame">
+                <img id="previewImage" alt="Selected maize seed photo">
+                <span class="preview-badge" data-i18n="previewTitle">Ready to identify</span>
+              </div>
+              <div class="scan-intro">
+                <h2 class="stage-title" data-i18n="previewTitle">Ready to identify</h2>
+                <p class="stage-text" data-i18n="previewHint">Check that the seed is clear and in focus before running the model.</p>
+              </div>
+              <div class="scan-actions">
+                <button class="btn btn-primary btn-lg" id="identifyBtn" type="button">
+                  <svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+                  <span data-i18n="identifySeeds">Identify Seeds</span>
+                </button>
+                <button class="btn btn-secondary" id="retakeBtn" type="button">
+                  <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>
+                  <span data-i18n="retake">Retake</span>
+                </button>
+                <button class="btn btn-quiet" id="removeImageBtn" type="button" data-i18n="remove">Remove</button>
+                <button class="btn btn-quiet" id="changeImageBtn" type="button" data-i18n="chooseAnother">Choose another</button>
+              </div>
+            </div>
+
+            <div class="scan-stage" id="scanLoading" hidden>
+              <div class="loading-panel" aria-live="polite">
+                <div class="spinner" aria-hidden="true"></div>
+                <h2 id="scanLoadingTitle" data-i18n="scanningTitle">Analysing your photo…</h2>
+                <p id="scanLoadingText" data-i18n="scanningBody">This can take a few seconds while the model starts.</p>
+              </div>
+            </div>
+
+            <div class="scan-stage" id="scanError" hidden>
+              <div class="error-panel" role="alert">
+                <span class="error-icon"><svg class="icon" aria-hidden="true"><use href="#i-alert"></use></svg></span>
+                <h2 id="scanErrorTitle" data-i18n="errorGeneric">Something went wrong. Please try again.</h2>
+                <p id="scanErrorText"></p>
+                <div class="scan-actions">
+                  <button class="btn btn-primary" id="scanRetryBtn" type="button" data-i18n="retry">Retry</button>
+                  <button class="btn btn-secondary" id="scanErrorUploadBtn" type="button" data-i18n="gallery">Choose photo</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="scan-stage" id="scanResult" hidden></div>
+          </div>
+
+          <aside class="scan-side">
+            <div class="info-card">
+              <h3><svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg><span data-i18n="tipsTitle">Tips for a better scan</span></h3>
+              <ul class="tips-list">
+                <li><span class="tip-dot">1</span><span data-i18n="tip1">Use one maize kernel, not a handful.</span></li>
+                <li><span class="tip-dot">2</span><span data-i18n="tip2">Use a plain background that contrasts with the seed.</span></li>
+                <li><span class="tip-dot">3</span><span data-i18n="tip3">Use even daylight and avoid deep shadows.</span></li>
+                <li><span class="tip-dot">4</span><span data-i18n="tip4">Hold the phone steady and let the seed fill the frame.</span></li>
+              </ul>
+            </div>
+            <div class="info-card">
+              <p class="privacy-line">
+                <svg class="icon" aria-hidden="true"><use href="#i-lock"></use></svg>
+                <span data-i18n="scanPrivacy">The image is processed on this device. It is not uploaded to a server.</span>
+              </p>
+            </div>
+            <div class="info-card">
+              <p class="privacy-line">
+                <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
+                <span data-i18n="confidenceDisclaimer">This is the model's confidence, not proof that a seed is genuine, certified or safe to plant.</span>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- GUIDE -->
+      <section class="screen" id="screen-guide" data-screen="guide" aria-labelledby="guide-title" hidden>
+        <header class="page-head">
+          <span class="eyebrow" data-i18n="navGuide">Seed Guide</span>
+          <h1 class="page-title" id="guide-title" data-i18n="guideTitle">Seed guide</h1>
+          <p class="page-sub" data-i18n="guideSubtitle">Understand the three supported seed groups and the conditions that matter in Tanzania.</p>
+        </header>
+
+        <div class="segmented" role="tablist" aria-label="Guide mode">
+          <button type="button" id="guideModeTypes" role="tab" aria-selected="true" data-guide-mode="types" data-i18n="guideSeedTypes">Seed types</button>
+          <button type="button" id="guideModeRegions" role="tab" aria-selected="false" data-guide-mode="regions" data-i18n="guideRegions">Growing guide</button>
+        </div>
+
+        <div id="guideTypesView">
+          <div class="pill-tabs" id="guideTabs" role="tablist" aria-label="Seed categories"></div>
+          <div id="guideCategory"></div>
+        </div>
+
+        <div id="guideRegionsView" hidden>
+          <div class="region-search">
+            <div class="search-field">
+              <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+              <input id="regionSearchInput" type="search" autocomplete="off" data-i18n-placeholder="regionSearchPlaceholder" data-i18n-aria-label="regionSearchLabel" placeholder="Type a region name…" aria-label="Search Tanzanian regions">
+            </div>
+          </div>
+          <p class="page-sub" id="regionSelectHint" style="margin-bottom:0.8rem" data-i18n="regionSelectHint">Select a region to see its guidance.</p>
+          <ul class="region-list" id="regionList" aria-label="Tanzanian regions"></ul>
+          <div class="region-empty" id="regionEmpty" hidden data-i18n="regionNoResults">No region matches your search.</div>
+          <div id="regionDetail"></div>
+        </div>
+      </section>
+
+      <!-- HISTORY -->
+      <section class="screen" id="screen-history" data-screen="history" aria-labelledby="history-title" hidden>
+        <header class="page-head">
+          <div class="page-head-row">
+            <div>
+              <span class="eyebrow" data-i18n="navHistory">History</span>
+              <h1 class="page-title" id="history-title" data-i18n="historyTitle">Scan history</h1>
+              <p class="page-sub" data-i18n="historySubtitle">Results saved on this device. Photos are kept only when you choose to include them.</p>
+            </div>
+            <button class="btn btn-danger-soft" id="clearHistoryBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
+              <span data-i18n="clearHistory">Clear history</span>
+            </button>
+          </div>
+        </header>
+        <div class="count-pill" id="historyCount"></div>
+        <div class="history-list" id="historyList"></div>
+        <p class="history-note" data-i18n="historyLocalNote">History is stored in this browser only. Clearing browser data may remove it.</p>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="screen" id="screen-settings" data-screen="settings" aria-labelledby="settings-title" hidden>
+        <header class="page-head">
+          <span class="eyebrow" data-i18n="settings">Settings</span>
+          <h1 class="page-title" id="settings-title" data-i18n="settingsTitle">Settings</h1>
+          <p class="page-sub" data-i18n="settingsSubtitle">Language, offline use, privacy and local data.</p>
+        </header>
+
+        <div class="settings-grid">
+          <section class="settings-card">
+            <h2 data-i18n="languageSectionTitle">Language</h2>
+            <p data-i18n="languageSectionBody">The interface changes immediately and keeps your current scan.</p>
+            <div class="lang-choices" role="group" aria-label="Language">
+              <button class="lang-choice" id="settingsLangEn" type="button" data-lang="en">English</button>
+              <button class="lang-choice" id="settingsLangSw" type="button" data-lang="sw">Kiswahili</button>
+            </div>
+          </section>
+
+          <section class="settings-card">
+            <h2 data-i18n="offlineSectionTitle">Offline &amp; storage</h2>
+            <p data-i18n="offlineSectionBody">Core screens, the seed model and the AI runtime can be stored on your device for offline scanning.</p>
+            <div class="status-line" id="settingsOnlineStatus">
+              <span class="dot"></span>
+              <span id="settingsOnlineText" data-i18n="statusOnline">You are online</span>
+            </div>
+            <p id="settingsOnlineBody" class="page-sub" style="font-size:0.78rem;margin-bottom:0.5rem" data-i18n="statusOnlineBody">You can prepare the offline pack or refresh cached files now.</p>
+            <div class="offline-grid" id="offlineChecks"></div>
+            <button class="btn btn-secondary btn-block" id="prepareOfflineBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+              <span data-i18n="prepareOffline">Prepare offline use</span>
+            </button>
+            <p class="history-note" id="storageInfo"></p>
+          </section>
+
+          <section class="settings-card wide">
+            <h2 data-i18n="installSectionTitle">Install Seed Classifier</h2>
+            <p data-i18n="installSectionBody">Installing adds Seed Classifier to your home screen and opens it in its own window.</p>
+            <div class="status-line" id="installStatusLine">
+              <span class="dot"></span>
+              <span id="installStatusText" data-i18n="notInstalledStatus">Not installed yet</span>
+            </div>
+            <button class="btn btn-primary" id="settingsInstallBtn" type="button" style="margin-top:0.5rem">
+              <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+              <span data-i18n="installButton">Install app</span>
+            </button>
+            <p class="history-note" id="installPromptNote" data-i18n="installUnavailable">This browser has not offered an automatic install prompt. Follow the instructions for your device.</p>
+            <div class="install-steps">
+              <div class="install-step">
+                <span class="install-step-num">1</span>
+                <div><strong data-i18n="installIosTitle">On iPhone or iPad</strong><span data-i18n="installIosBody">Open Seed Classifier in Safari, tap the Share button, then choose “Add to Home Screen”.</span></div>
+              </div>
+              <div class="install-step">
+                <span class="install-step-num">2</span>
+                <div><strong data-i18n="installAndroidTitle">On Android</strong><span data-i18n="installAndroidBody">Open the browser menu and choose “Install app” or “Add to Home screen”.</span></div>
+              </div>
+              <div class="install-step">
+                <span class="install-step-num">3</span>
+                <div><strong data-i18n="installDesktopTitle">On a computer</strong><span data-i18n="installDesktopBody">Use the install icon in the browser address bar, or the browser menu, to install Seed Classifier.</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="settings-card">
+            <h2 data-i18n="privacyTitle">Privacy</h2>
+            <p data-i18n="privacyBody">Seed Classifier is designed to keep your scan on your device. The classifier runs locally using WebAssembly and ONNX Runtime.</p>
+            <ul class="bullet-list">
+              <li data-i18n="privacyBullet1">Photos are not uploaded to a server.</li>
+              <li data-i18n="privacyBullet2">No account or sign-in is required.</li>
+              <li data-i18n="privacyBullet3">No external API is needed for classification.</li>
+              <li data-i18n="privacyBullet4">History and photos stay in your browser until you delete them.</li>
+            </ul>
+            <p class="privacy-line" style="margin-top:0.8rem">
+              <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>
+              <span data-i18n="settingsCameraNote">Direct camera access requires HTTPS or localhost. Photo upload works without camera permission.</span>
+            </p>
+          </section>
+
+          <section class="settings-card">
+            <h2 data-i18n="modelTitle">About the model</h2>
+            <p data-i18n="modelBody">The classifier is a small convolutional network exported to ONNX and run locally. It was trained on close-up images of individual maize kernels.</p>
+            <div class="meta-grid" id="modelMeta"></div>
+            <p class="history-note" data-i18n="modelAccuracyNote">Project evaluation on seed-disjoint test data. Real-world accuracy varies with lighting, background and the seed itself.</p>
+          </section>
+
+          <section class="settings-card wide">
+            <h2 data-i18n="dataTitle">Local data</h2>
+            <p data-i18n="dataBody">Manage the classification summaries, photos and preferences stored by Seed Classifier.</p>
+            <div class="data-actions">
+              <button class="btn btn-danger-soft" id="settingsClearHistory" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
+                <span data-i18n="clearHistoryBtn">Clear scan history</span>
+              </button>
+            </div>
+            <div class="danger-zone">
+              <button class="btn btn-danger" id="settingsClearAll" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-alert"></use></svg>
+                <span data-i18n="clearAllBtn">Reset Seed Classifier on this device</span>
+              </button>
+              <p class="history-note" data-i18n="clearAllBody">This removes history, preferences and the offline cache from this device. The app will need an internet connection to download the model again.</p>
+            </div>
+          </section>
+        </div>
+
+        <p class="settings-foot">
+          <span data-i18n="aboutBody">A mobile-first maize seed classifier and growing guide for Tanzania.</span>
+          <br>
+          <span data-i18n="version">Version</span> <span id="appVersion">1.0.3</span>
+        </p>
+      </section>
+    </main>
+
+    <div class="update-banner" id="updateBanner" hidden>
+      <span data-i18n="updateAvailable">A new version of Seed Classifier is ready.</span>
+      <button class="btn btn-secondary" id="updateBtn" type="button" data-i18n="updateNow">Update now</button>
+    </div>
+
+    <footer class="site-foot" data-i18n="footerDisclaimer">Seed Classifier supports decisions; it does not certify seed authenticity, quality or suitability. Always check the seed label and local extension advice.</footer>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a class="nav-item" href="#home" data-nav="home">
+        <span class="nav-icon"><svg class="icon" aria-hidden="true"><use href="#i-home"></use></svg></span>
+        <span class="nav-label" data-i18n="navHome">Home</span>
+      </a>
+      <a class="nav-item" href="#scan" data-nav="scan">
+        <span class="nav-icon"><svg class="icon" aria-hidden="true"><use href="#i-scan"></use></svg></span>
+        <span class="nav-label" data-i18n="navScan">Scan</span>
+      </a>
+      <a class="nav-item" href="#guide" data-nav="guide">
+        <span class="nav-icon"><svg class="icon" aria-hidden="true"><use href="#i-guide"></use></svg></span>
+        <span class="nav-label" data-i18n="navGuide">Seed Guide</span>
+      </a>
+      <a class="nav-item" href="#history" data-nav="history">
+        <span class="nav-icon"><svg class="icon" aria-hidden="true"><use href="#i-history"></use></svg></span>
+        <span class="nav-label" data-i18n="navHistory">History</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="dialog" id="confirmDialog" aria-labelledby="confirmTitle">
+    <div class="dialog-inner">
+      <h2 class="dialog-title" id="confirmTitle"></h2>
+      <p class="dialog-text" id="confirmText"></p>
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" id="confirmCancel" type="button" data-i18n="cancel">Cancel</button>
+        <button class="btn btn-danger" id="confirmOk" type="button" data-i18n="confirm">Confirm</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="dialog" id="historyDialog" aria-labelledby="historyDialogTitle">
+    <div class="dialog-inner dialog-content">
+      <button class="icon-button dialog-close" id="historyDialogClose" type="button" data-i18n-aria-label="close" aria-label="Close">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+      <h2 class="dialog-title" id="historyDialogTitle" data-i18n="historyDetailTitle">Saved scan</h2>
+      <div id="historyDialogContent"></div>
+    </div>
+  </dialog>
+
+  <script src="./preprocess.js"></script>
+  <script src="./vendor/ort.min.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
