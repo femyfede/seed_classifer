@@ -37,7 +37,7 @@ def lan_ip() -> str:
         return "127.0.0.1"
 
 
-class Handler(http.server.SimpleHTTPRequestHandler):
+class LocalServerHandler(http.server.SimpleHTTPRequestHandler):
     # Correct MIME types (some systems report .wasm/.mjs as octet-stream,
     # which breaks WebAssembly streaming and ES module imports).
     extensions_map = {
@@ -77,7 +77,7 @@ def main() -> None:
     if args.lan:
         args.host = "0.0.0.0"
 
-    handler = functools.partial(Handler, directory=args.directory)
+    handler = functools.partial(LocalServerHandler, directory=args.directory)
     socketserver.TCPServer.allow_reuse_address = True
 
     with socketserver.ThreadingTCPServer((args.host, args.port), handler) as httpd:
