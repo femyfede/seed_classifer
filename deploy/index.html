@@ -381,6 +381,36 @@
         <p class="history-note" data-i18n="historyLocalNote">History is stored in this browser only. Clearing browser data may remove it.</p>
       </section>
 
+      <!-- CHAT -->
+      <section class="screen" id="screen-chat" data-screen="chat" aria-labelledby="chat-title" hidden>
+        <header class="page-head">
+          <div class="page-head-row">
+            <div>
+              <span class="eyebrow" data-i18n="navChat">Chat</span>
+              <h1 class="page-title" id="chat-title" data-i18n="chatTitle">Seed AI Assistant</h1>
+              <p class="page-sub" data-i18n="chatSubtitle">Ask me anything about maize seeds, growing, or your scan results.</p>
+            </div>
+            <button class="btn btn-danger-soft" id="clearChatBtn" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
+              <span data-i18n="clearChat">Clear chat</span>
+            </button>
+          </div>
+        </header>
+
+        <main class="chat-container">
+          <div class="chat-window" id="chatWindow" aria-live="polite" aria-atomic="true">
+            <!-- Chat messages will be inserted here -->
+          </div>
+
+          <div class="chat-input-wrapper">
+            <input type="text" id="chatInput" placeholder="Type your message…" autocomplete="off" />
+            <button class="btn btn-primary" id="sendBtn" aria-label="Send message">
+              <svg class="icon" aria-hidden="true"><use href="#i-send"></use></svg>
+            </button>
+          </div>
+        </main>
+      </section>
+
       <!-- SETTINGS -->
       <section class="screen" id="screen-settings" data-screen="settings" aria-labelledby="settings-title" hidden>
         <header class="page-head">
@@ -515,6 +545,10 @@
       <a class="nav-item" href="#history" data-nav="history">
         <span class="nav-icon"><svg class="icon" aria-hidden="true"><use href="#i-history"></use></svg></span>
         <span class="nav-label" data-i18n="navHistory">History</span>
+      </a>
+      <a class="nav-item" href="#chat" data-nav="chat">
+        <span class="nav-icon"><svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg></span>
+        <span class="nav-label" data-i18n="navChat">Chat</span>
       </a>
     </nav>
   </div>

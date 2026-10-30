@@ -2710,3 +2710,54 @@ dialog.dialog::backdrop {
     scroll-behavior: auto !important;
   }
 }
+
+/* Chat screen styles */
+#screen-chat .chat-window {
+  height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1rem;
+  font-size: 0.94rem;
+}
+
+#screen-chat .chat-message {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.75rem;
+  max-width: 80%;
+}
+
+#screen-chat .chat-message.user {
+  background: var(--green);
+  color: var(--white);
+  margin-left: auto;
+}
+
+#screen-chat .chat-message.bot {
+  background: var(--sage);
+  color: var(--ink);
+  margin-right: auto;
+}
+
+#screen-chat .chat-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#screen-chat .chat-input-wrapper input {
+  flex: 1;
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  font-size: 0.94rem;
+}
+
+#screen-chat .chat-input-wrapper button {
+  min-height: 48px;
+  padding: 0 1rem;
+}

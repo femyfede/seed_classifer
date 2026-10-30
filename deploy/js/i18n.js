@@ -337,7 +337,10 @@ export const TRANSLATIONS = {
     cameraUnsupportedTitle: "Camera not supported",
     cameraErrorTitle: "Camera problem",
     cameraRetry: "Try camera again",
-  },
+    navChat: "Chat",
+    chatTitle: "Seed AI Assistant",
+    chatSubtitle: "Ask me anything about maize seeds, growing, or your scan results.",
+    clearChat: "Clear chat",
 
   sw: {
     appName: "Seed Classifier",
@@ -668,7 +671,10 @@ export const TRANSLATIONS = {
     cameraUnsupportedTitle: "Kamera haitumiki",
     cameraErrorTitle: "Hitilafu ya kamera",
     cameraRetry: "Jaribu kamera tena",
-  },
+    navChat: "Chat",
+    chatTitle: "Msaidizi AI la Mbegu",
+    chatSubtitle: "Nenda swali nyenye kuhusiana na mbegu za mahindi, kilimo au matokeo yako ya upimaji.",
+    clearChat: "Futa chat",
 };
 
 export function translate(lang, key, vars) {

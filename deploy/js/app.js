@@ -82,6 +82,58 @@ const CAMERA_MESSAGES = {
   generic: "errorGeneric",
 };
 
+const CHATBOT_RESPONSES = {
+  asili: `The **Asili** category includes traditional and farmer-saved maize types with wide local variation. These seeds are often saved from season to season and adapted to local conditions. They may have diverse characteristics in terms of kernel color, size, and shape.`,
+  chotara: `**Chotara** refers to hybrid maize types bred from selected parent lines. Fresh seed is normally bought each season as they don't breed true to type. These often have more uniform characteristics and are developed for specific traits like yield or disease resistance.`,
+  huria: `**Huria** are open-pollinated improved types. Seed can be saved with careful selection and isolation, but cross-pollination may occur. These were developed to improve upon local varieties while maintaining some ability to save seed.`,
+  unrelated: `The image does not match the Asili, Chotara, or Huria categories. This could be a different type of seed, not a maize kernel, or an image that's unclear. Try photographing one kernel on a plain, contrasting surface with even lighting.`,
+  guide: `I can help you explore the seed guide! I can show you information about the three seed categories (Asili, Chotara, Huria) or the growing guide for different regions in Tanzania. What would you like to know?`,
+  region: `I can help you explore growing guides for Tanzanian regions. I have information about various regions including their ecological zones, soil requirements, planting conditions, seasonal considerations, and seed selection advice. Which region are you interested in?`,
+  default: `I'm the Seed AI Assistant! I can help you with:\n\n• Identifying maize seed categories (Asili, Chotara, Huria)\n• Exploring the seed guide and growing conditions\n• Answering questions about your scan results\n• Providing regional growing guidance for Tanzania\n\nWhat would you like to know?`,
+};
+
+function getChatbotResponse(message) {
+  const lower = (message || "").toLowerCase().trim();
+  if (!lower) return CHATBOT_RESPONSES.default;
+
+  if (
+    lower.includes("asili") ||
+    lower.includes("traditional") ||
+    lower.includes("farmer-saved")
+  )
+    return CHATBOT_RESPONSES.asili;
+  if (
+    lower.includes("chotara") ||
+    lower.includes("hybrid") ||
+    lower.includes("parent lines")
+  )
+    return CHATBOT_RESPONSES.chotara;
+  if (
+    lower.includes("huria") ||
+    lower.includes("improved types") ||
+    lower.includes("open-pollinated")
+  )
+    return CHATBOT_RESPONSES.huria;
+  if (lower.includes("unrelated") || lower.includes("not match"))
+    return CHATBOT_RESPONSES.unrelated;
+  if (lower.includes("guide") || lower.includes("seed guide"))
+    return CHATBOT_RESPONSES.guide;
+  if (lower.includes("region") || lower.includes("tanzania"))
+    return CHATBOT_RESPONSES.region;
+  return CHATBOT_RESPONSES.default;
+}
+
+function addMessage(text, sender) {
+  const chatWindow = $("chatWindow");
+  if (!chatWindow) return;
+
+  const msgDiv = document.createElement("div");
+  msgDiv.className = `chat-message ${sender}`;
+  msgDiv.textContent = text;
+  chatWindow.appendChild(msgDiv);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
 const $ = (id) => document.getElementById(id);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -110,6 +162,10 @@ const state = {
     saveDismissed: false,
     imageSaved: false,
     saving: false,
+  },
+  chat: {
+    messages: [],
+    input: "",
   },
 };
 
@@ -322,6 +378,8 @@ function parseRoute() {
       route.guideMode = "types";
       route.guideCategory = GUIDE_CATEGORIES.includes(parts[1]) ? parts[1] : null;
     }
+  } else if (parts[0] === "chat") {
+    route.screen = "chat";
   }
 
   return route;
@@ -346,6 +404,9 @@ function applyRoute(options = {}) {
     if (state.guideMode === "regions") {
       state.regionId = route.regionId || null;
     }
+  } else if (route.screen === "chat") {
+    state.chat.messages = [];
+    renderChat();
   }
 
   showScreen(state.screen);
@@ -384,6 +445,7 @@ function renderCurrentScreen() {
   else if (state.screen === "guide") renderGuide();
   else if (state.screen === "history") renderHistory();
   else if (state.screen === "settings") renderSettings();
+  else if (state.screen === "chat") renderChat();
 }
 
 /* --------------------------------------------------------------------------
@@ -456,6 +518,26 @@ function updateScanStatus() {
     pill.removeAttribute("title");
     pill.removeAttribute("aria-label");
   }
+}
+
+function renderChat() {
+  const chatWindow = $("chatWindow");
+  const chatInput = $("chatInput");
+  if (!chatWindow || !chatInput) return;
+
+  // Clear existing messages
+  chatWindow.innerHTML = "";
+
+  // Render chat messages
+  state.chat.messages.forEach((msg) => {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `chat-message ${msg.sender}`;
+    msgDiv.textContent = msg.text;
+    chatWindow.appendChild(msgDiv);
+  });
+
+  // Focus input
+  chatInput.focus();
 }
 
 async function ensureMetadata() {
@@ -1580,6 +1662,33 @@ function bindDialogEvents() {
 /* --------------------------------------------------------------------------
  * Event wiring
  * ----------------------------------------------------------------------- */
+function bindDialogEvents() {
+  const confirmDialog = $("confirmDialog");
+  const historyDialog = $("historyDialog");
+
+  $("confirmCancel").addEventListener("click", () => confirmDialog.close("cancel"));
+  $("confirmOk").addEventListener("click", () => confirmDialog.close("confirm"));
+  confirmDialog.addEventListener("close", () => {
+    const resolve = pendingConfirm;
+    pendingConfirm = null;
+    if (resolve) resolve(confirmDialog.returnValue === "confirm");
+  });
+
+  $("historyDialogClose").addEventListener("click", () => historyDialog.close());
+  [confirmDialog, historyDialog].forEach((dialog) => {
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close("cancel");
+    });
+  });
+
+  $("historyDialogContent").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-history-guide]");
+    if (!button) return;
+    const key = button.getAttribute("data-history-guide");
+    historyDialog.close();
+    window.location.hash = `#guide/${key}`;
+  });
+}
 
 function bindEvents() {
   bindDialogEvents();
@@ -1624,6 +1733,7 @@ function bindEvents() {
   $("cameraUploadBtn").addEventListener("click", () => $("fileInput").click());
   $("retakeBtn").addEventListener("click", retakePhoto);
   $("removeImageBtn").addEventListener("click", resetScan);
+
   $("identifyBtn").addEventListener("click", identify);
   $("captureBtn").addEventListener("click", capturePhoto);
   $("switchCameraBtn").addEventListener("click", switchCamera);
@@ -1728,7 +1838,7 @@ function bindEvents() {
   $("settingsClearHistory").addEventListener("click", clearAllHistory);
   $("settingsClearAll").addEventListener("click", resetApp);
 
-  $("updateBtn").addEventListener("click", () => {
+$("updateBtn").addEventListener("click", () => {
     if (!pwa.applyUpdate()) window.location.reload();
     else {
       $("updateBtn").disabled = true;
@@ -1767,6 +1877,32 @@ async function requestInstall() {
   if (result.outcome === "unavailable") {
     showToast(t("installUnavailable"));
   }
+}
+
+async function sendChatMessage() {
+  const input = $("chatInput");
+  const message = input.value.trim();
+  if (!message) return;
+
+  // Add user message
+  state.chat.messages.push({ text: message, sender: "user" });
+  addMessage(message, "user");
+  input.value = "";
+
+  // Get bot response
+  const response = getChatbotResponse(message);
+  state.chat.messages.push({ text: response, sender: "bot" });
+  addMessage(response, "bot");
+
+  // Focus input again
+  input.focus();
+}
+
+function clearChat() {
+  state.chat.messages = [];
+  const chatWindow = $("chatWindow");
+  if (chatWindow) chatWindow.innerHTML = "";
+  showToast(t("clearChat"));
 }
 
 /* --------------------------------------------------------------------------
