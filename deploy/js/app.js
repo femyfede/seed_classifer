@@ -123,13 +123,20 @@ function getChatbotResponse(message) {
   return CHATBOT_RESPONSES.default;
 }
 
+function formatChatMarkdown(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+    .replace(/\n/g, "<br>");
+}
+
 function addMessage(text, sender) {
   const chatWindow = $("chatWindow");
   if (!chatWindow) return;
 
   const msgDiv = document.createElement("div");
   msgDiv.className = `chat-message ${sender}`;
-  msgDiv.textContent = text;
+  msgDiv.innerHTML = formatChatMarkdown(escapeHtml(text));
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
@@ -525,19 +532,24 @@ function renderChat() {
   const chatInput = $("chatInput");
   if (!chatWindow || !chatInput) return;
 
-  // Clear existing messages
   chatWindow.innerHTML = "";
 
-  // Render chat messages
+  if (state.chat.messages.length === 0) {
+    const welcome = document.createElement("div");
+    welcome.className = "chat-welcome";
+    welcome.innerHTML = `<p><strong>${t("chatTitle")}</strong></p><p>${t("chatSubtitle")}</p>`;
+    chatWindow.appendChild(welcome);
+  }
+
   state.chat.messages.forEach((msg) => {
     const msgDiv = document.createElement("div");
     msgDiv.className = `chat-message ${msg.sender}`;
-    msgDiv.textContent = msg.text;
+    msgDiv.innerHTML = formatChatMarkdown(escapeHtml(msg.text));
     chatWindow.appendChild(msgDiv);
   });
 
-  // Focus input
   chatInput.focus();
+  chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 async function ensureMetadata() {
@@ -1845,6 +1857,15 @@ $("updateBtn").addEventListener("click", () => {
       $("updateBtn").textContent = t("loading");
     }
   });
+
+  $("chatInput").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendChatMessage();
+    }
+  });
+  $("sendBtn").addEventListener("click", sendChatMessage);
+  $("clearChatBtn").addEventListener("click", clearChat);
 
   window.addEventListener("hashchange", () => applyRoute());
   window.addEventListener(
