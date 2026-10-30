@@ -1,0 +1,9 @@
+requirements.txt
+train_model.py
+SeedClass/
+tools/
+*.py
+data_maize/
+data_maize_extracted/
+model/
+.git
