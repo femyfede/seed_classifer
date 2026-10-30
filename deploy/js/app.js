@@ -44,7 +44,7 @@ import {
 } from "./inference.js";
 import * as pwa from "./pwa.js";
 
-const APP_VERSION = "1.0.4";
+const APP_VERSION = "1.0.5";
 const GUIDE_CATEGORIES = ["local", "chotara", "huria"];
 const SCREEN_IDS = {
   home: "screen-home",
@@ -52,6 +52,7 @@ const SCREEN_IDS = {
   guide: "screen-guide",
   history: "screen-history",
   settings: "screen-settings",
+  chat: "screen-chat",
 };
 const STAGE_IDS = {
   empty: "scanEmpty",
@@ -412,7 +413,6 @@ function applyRoute(options = {}) {
       state.regionId = route.regionId || null;
     }
   } else if (route.screen === "chat") {
-    state.chat.messages = [];
     renderChat();
   }
 
@@ -1674,34 +1674,6 @@ function bindDialogEvents() {
 /* --------------------------------------------------------------------------
  * Event wiring
  * ----------------------------------------------------------------------- */
-function bindDialogEvents() {
-  const confirmDialog = $("confirmDialog");
-  const historyDialog = $("historyDialog");
-
-  $("confirmCancel").addEventListener("click", () => confirmDialog.close("cancel"));
-  $("confirmOk").addEventListener("click", () => confirmDialog.close("confirm"));
-  confirmDialog.addEventListener("close", () => {
-    const resolve = pendingConfirm;
-    pendingConfirm = null;
-    if (resolve) resolve(confirmDialog.returnValue === "confirm");
-  });
-
-  $("historyDialogClose").addEventListener("click", () => historyDialog.close());
-  [confirmDialog, historyDialog].forEach((dialog) => {
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) dialog.close("cancel");
-    });
-  });
-
-  $("historyDialogContent").addEventListener("click", (event) => {
-    const button = event.target.closest("[data-history-guide]");
-    if (!button) return;
-    const key = button.getAttribute("data-history-guide");
-    historyDialog.close();
-    window.location.hash = `#guide/${key}`;
-  });
-}
-
 function bindEvents() {
   bindDialogEvents();
 
@@ -1850,7 +1822,7 @@ function bindEvents() {
   $("settingsClearHistory").addEventListener("click", clearAllHistory);
   $("settingsClearAll").addEventListener("click", resetApp);
 
-$("updateBtn").addEventListener("click", () => {
+  $("updateBtn").addEventListener("click", () => {
     if (!pwa.applyUpdate()) window.location.reload();
     else {
       $("updateBtn").disabled = true;
@@ -1921,8 +1893,7 @@ async function sendChatMessage() {
 
 function clearChat() {
   state.chat.messages = [];
-  const chatWindow = $("chatWindow");
-  if (chatWindow) chatWindow.innerHTML = "";
+  renderChat();
   showToast(t("clearChat"));
 }
 

@@ -341,7 +341,10 @@ export const TRANSLATIONS = {
     chatTitle: "Seed AI Assistant",
     chatSubtitle: "Ask me anything about maize seeds, growing, or your scan results.",
     clearChat: "Clear chat",
-
+    chatInputPlaceholder: "Ask a question about seeds or growing…",
+    chatInputLabel: "Message the Seed Assistant",
+    sendChatMessage: "Send message",
+  },
   sw: {
     appName: "Seed Classifier",
     skipToContent: "Ruka hadi maudhui",
@@ -675,6 +678,10 @@ export const TRANSLATIONS = {
     chatTitle: "Msaidizi AI la Mbegu",
     chatSubtitle: "Nenda swali nyenye kuhusiana na mbegu za mahindi, kilimo au matokeo yako ya upimaji.",
     clearChat: "Futa chat",
+    chatInputPlaceholder: "Uliza kuhusu mbegu au kilimo…",
+    chatInputLabel: "Ujumbe kwa Msaidizi wa Mbegu",
+    sendChatMessage: "Tuma ujumbe",
+  },
 };
 
 export function translate(lang, key, vars) {

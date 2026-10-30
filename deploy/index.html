@@ -398,18 +398,18 @@
           </div>
         </header>
 
-        <main class="chat-container">
+        <div class="chat-container">
           <div class="chat-window" id="chatWindow" aria-live="polite" aria-atomic="true">
             <!-- Chat messages will be inserted here -->
           </div>
 
           <div class="chat-input-wrapper">
-            <input type="text" id="chatInput" placeholder="Type your message…" autocomplete="off" />
-            <button class="btn btn-primary" id="sendBtn" aria-label="Send message">
+            <input type="text" id="chatInput" data-i18n-placeholder="chatInputPlaceholder" data-i18n-aria-label="chatInputLabel" placeholder="Ask a question about seeds or growing…" autocomplete="off" />
+            <button class="btn btn-primary" id="sendBtn" type="button" data-i18n-aria-label="sendChatMessage" aria-label="Send message">
               <svg class="icon" aria-hidden="true"><use href="#i-send"></use></svg>
             </button>
           </div>
-        </main>
+        </div>
       </section>
 
       <!-- SETTINGS -->

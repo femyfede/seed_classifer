@@ -30,7 +30,7 @@ export const SEED_GUIDE = {
     id: "local",
     nameKey: "categoryAsili",
     shortKey: "categoryAsiliShort",
-    illustration: "assets/img/seed-asili.svg",
+    illustration: "assets/img/seed-asili.jpg",
     accent: "#C9903A",
     sections: {
       overview: sec(
@@ -180,7 +180,7 @@ export const SEED_GUIDE = {
     id: "chotara",
     nameKey: "categoryChotara",
     shortKey: "categoryChotaraShort",
-    illustration: "assets/img/seed-chotara.svg",
+    illustration: "assets/img/seed-chotara.jpg",
     accent: "#477A4D",
     sections: {
       overview: sec(
@@ -330,7 +330,7 @@ export const SEED_GUIDE = {
     id: "huria",
     nameKey: "categoryHuria",
     shortKey: "categoryHuriaShort",
-    illustration: "assets/img/seed-huria.svg",
+    illustration: "assets/img/seed-huria.jpg",
     accent: "#8FB58C",
     sections: {
       overview: sec(
