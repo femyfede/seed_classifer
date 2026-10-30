@@ -24,3 +24,4 @@ __pycache__/
 /.playwright-mcp/
 .DS_Store
 Thumbs.db
+.vercel
