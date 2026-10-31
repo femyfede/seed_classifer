@@ -508,9 +508,6 @@ function renderHome() {
     const guide = SEED_GUIDE[key];
     return `
       <article class="category-card">
-        <div class="category-media">
-          <img src="./${escapeHtml(guide.illustration)}" width="480" height="360" alt="" loading="lazy">
-        </div>
         <div class="category-body">
           <h3>${escapeHtml(t(guide.nameKey))}</h3>
           <p>${escapeHtml(t(guide.shortKey))}</p>
@@ -1209,9 +1206,6 @@ function renderGuideCategories() {
 
   $("guideCategory").innerHTML = `
     <div class="category-hero">
-      <div class="category-hero-media">
-        <img src="./${escapeHtml(guide.illustration)}" width="520" height="390" alt="">
-      </div>
       <div class="category-hero-body">
         <span class="eyebrow">${escapeHtml(t("whatItMeans"))}</span>
         <h2>${escapeHtml(t(guide.nameKey))}</h2>
@@ -1989,11 +1983,7 @@ function openChat() {
 function closeChat() {
   const dialog = $("chatDialog");
   if (dialog && dialog.open) dialog.close();
-  try {
-    window.history.replaceState(null, "", window.location.pathname + window.location.search);
-  } catch {
-    /* ignore history errors */
-  }
+  window.location.hash = "#home";
 }
 
 /* --------------------------------------------------------------------------
