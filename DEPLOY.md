@@ -28,9 +28,20 @@ npx vercel --prod
 ```
 
 Run this from the repository root. On first use, Vercel asks you to log in and
-link or create a project. The root `vercel.json` publishes `deploy/` and sets
-the required response headers. The command prints the public HTTPS URL; open
-that URL in Safari on your iPhone, then choose **Share → Add to Home Screen**.
+link or create a project. The root `vercel.json` publishes `deploy/`, serves
+the private chat proxy in `api/chat.js`, and sets the required response
+headers. Before deploying, add `GROQ_API_KEY` in the Vercel project’s
+**Settings → Environment Variables**; never put the key in browser code or
+commit it to the repository. Redeploy after adding or rotating the secret.
+The command prints the public HTTPS URL; open that URL in Safari on your
+iPhone, then choose **Share → Add to Home Screen**.
+
+The Groq chat proxy is available on the Vercel deployment only. GitHub Pages
+and other static hosts do not run the server-side function, so chat uses its
+local guidance fallback there.
+
+If a Groq API key was previously shared or exposed, revoke it in Groq and
+create a replacement before setting `GROQ_API_KEY` in Vercel.
 
 ---
 

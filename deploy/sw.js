@@ -1,5 +1,5 @@
 /* Seed Classifier offline service worker — relative paths support subdirectory hosting. */
-const CACHE_VERSION = "seedyai-v1.0.5";
+const CACHE_VERSION = "seedyai-v1.0.6";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

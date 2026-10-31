@@ -44,7 +44,7 @@ import {
 } from "./inference.js";
 import * as pwa from "./pwa.js";
 
-const APP_VERSION = "1.0.5";
+const APP_VERSION = "1.0.6";
 const GUIDE_CATEGORIES = ["local", "chotara", "huria"];
 const SCREEN_IDS = {
   home: "screen-home",
@@ -83,27 +83,6 @@ const CAMERA_MESSAGES = {
   generic: "errorGeneric",
 };
 
-const GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_CHAT_MODEL = "llama-3.3-70b-versatile";
-const GROQ_API_KEY = (() => {
-  try {
-    const fromWindow = typeof window !== "undefined" ? window.GROQ_API_KEY || window.__SEED_GROQ_KEY__ : "";
-    if (fromWindow) return fromWindow;
-    const fromStorage = typeof window !== "undefined" ? window.localStorage.getItem("seed-groq-key") : "";
-    if (fromStorage) return fromStorage;
-  } catch {
-    // Ignore storage access issues and fall back to the local assistant.
-  }
-  return typeof import.meta !== "undefined" ? import.meta.env?.VITE_GROQ_API_KEY || "" : "";
-})();
-const CHATBOT_SYSTEM_PROMPT = [
-  "You are the Seed AI Assistant of the Seed Classifier app.",
-  "You help farmers and growers in Tanzania understand maize seed categories: Asili (traditional farmer-saved), Chotara (hybrid) and Huria (open-pollinated improved).",
-  "You also answer questions about growing conditions, regions and scan results.",
-  "Keep answers practical, friendly and concise. Use short paragraphs or bullet points when useful.",
-  "Never invent facts about a specific seed variety or certification.",
-].join(" ");
-
 function fallbackChatResponse(message) {
   const text = String(message || "").toLowerCase();
   if (/asili|local|traditional/i.test(text)) {
@@ -125,42 +104,23 @@ function fallbackChatResponse(message) {
 }
 
 async function getChatbotResponse(message, historyMessages = []) {
-  if (!GROQ_API_KEY) return fallbackChatResponse(message);
-
-  const messages = [
-    { role: "system", content: CHATBOT_SYSTEM_PROMPT },
-    ...historyMessages.map((entry) => ({
-      role: entry.sender === "user" ? "user" : "assistant",
-      content: entry.text,
-    })),
-    { role: "user", content: message },
-  ];
-
   try {
-    const response = await fetch(GROQ_CHAT_URL, {
+    const response = await fetch("/api/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${GROQ_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: GROQ_CHAT_MODEL,
-        temperature: 0.6,
-        max_tokens: 700,
-        messages,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, history: historyMessages }),
     });
 
     if (!response.ok) {
-      const fallback = fallbackChatResponse(message);
-      console.warn(`Groq API unavailable (${response.status}); using local fallback.`);
-      return fallback;
+      console.warn(`Chat API unavailable (${response.status}); using local fallback.`);
+      return fallbackChatResponse(message);
     }
 
     const data = await response.json();
-    const content = data?.choices?.[0]?.message?.content;
-    if (!content) throw new Error("Groq chat returned an empty response");
-    return content;
+    if (typeof data?.response !== "string" || !data.response.trim()) {
+      throw new Error("Chat API returned an empty response");
+    }
+    return data.response;
   } catch (error) {
     console.error("Seed AI Assistant request failed:", error);
     return fallbackChatResponse(message);
