@@ -17,6 +17,7 @@ export const TRANSLATIONS = {
     navHistory: "History",
     settings: "Settings",
     openSettings: "Open settings",
+    installApp: "Install app",
     close: "Close",
     back: "Back",
     cancel: "Cancel",
@@ -126,6 +127,9 @@ export const TRANSLATIONS = {
       "This is the model's confidence, not proof that a seed is genuine, certified or safe to plant.",
     lowConfidence:
       "Confidence is low. Try another photo with one seed, better light and a plain background.",
+    lowConfidenceExplainer:
+      "The model is uncertain about this seed. Try photographing with better lighting or a clearer background.",
+    retryPhotography: "Retry with better photo",
     classProbabilities: "All category scores",
     resultImageAlt: "Photo used for this classification",
     unrelatedTitle: "This does not look like a supported seed",
@@ -354,6 +358,7 @@ export const TRANSLATIONS = {
     navHistory: "Historia",
     settings: "Mipangilio",
     openSettings: "Fungua mipangilio",
+    installApp: "Sakinisha programu",
     close: "Funga",
     back: "Rudi",
     cancel: "Ghairi",
@@ -463,6 +468,9 @@ export const TRANSLATIONS = {
       "Huu ni uhakika wa modeli, si uthibitisho kuwa mbegu ni halisi, imethibitishwa au salama kupandwa.",
     lowConfidence:
       "Uhakika ni mdogo. Jaribu picha nyingine yenye mbegu moja, mwanga bora na mandhari tambarare.",
+    lowConfidenceExplainer:
+      "Modeli si hakika kuhusu mbegu hii. Jaribu kupiga picha kwa mwanga bora au mandhari safi.",
+    retryPhotography: "Jaribu tena na picha nzuri",
     classProbabilities: "Alama za aina zote",
     resultImageAlt: "Picha iliyotumika kwa utambuzi huu",
     unrelatedTitle: "Hii haionekani kama mbegu inayotumika",
