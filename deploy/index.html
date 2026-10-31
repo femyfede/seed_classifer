@@ -66,6 +66,9 @@
           <span class="brand-name">Seedy<span>AI</span></span>
         </a>
         <div class="topbar-actions">
+          <button class="icon-button" id="installBtn" type="button" data-i18n-aria-label="installApp" aria-label="Install app" hidden title="Install app on your device">
+            <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+          </button>
           <span class="conn-badge" id="connBadge" aria-live="polite">
             <span class="dot"></span>
             <span id="connBadgeText" data-i18n="online">Online</span>
@@ -111,9 +114,6 @@
               </span>
             </div>
           </div>
-          <div class="hero-art">
-            <img src="./assets/img/hero-maize.svg" width="760" height="620" alt="">
-          </div>
         </div>
 
         <div class="quick-stats" aria-label="Seed Classifier features">
@@ -138,8 +138,8 @@
           <div class="steps-grid">
             <article class="step-card">
               <div class="step-num">1</div>
-              <h3 data-i18n="step1Title">Photograph a kernel</h3>
-              <p data-i18n="step1Body">Use one seed on a plain surface with even lighting.</p>
+              <h3 data-i18n="step1Title">Photograph kernels</h3>
+              <p data-i18n="step1Body">Scan one or more seeds on a plain surface with even lighting.</p>
             </article>
             <article class="step-card">
               <div class="step-num">2</div>
@@ -187,7 +187,7 @@
             <div>
               <span class="eyebrow" data-i18n="navScan">Scan</span>
               <h1 class="page-title" id="scan-title" data-i18n="scanTitle">Scan maize seeds</h1>
-              <p class="page-sub" data-i18n="scanSubtitle">Photograph one maize kernel clearly. The model identifies the seed category on your device.</p>
+              <p class="page-sub" data-i18n="scanSubtitle">Photograph maize kernels clearly. Scan multiple samples to compare seed types and build confidence in your identification.</p>
             </div>
             <span class="status-pill" id="scanStatus" aria-live="polite">
               <span class="dot"></span>
@@ -228,7 +228,7 @@
                 <div class="camera-guide" aria-hidden="true"></div>
                 <div class="camera-status" id="cameraStatus" data-i18n="cameraOpening">Opening camera…</div>
               </div>
-              <p class="camera-hint" data-i18n="cameraHint">Place one kernel on a plain, contrasting surface. Fill most of the frame with the seed.</p>
+              <p class="camera-hint" data-i18n="cameraHint">Place one or more kernels on a plain, contrasting surface. Fill most of the frame with the seeds.</p>
               <div class="scan-actions">
                 <button class="btn btn-primary btn-lg" id="captureBtn" type="button">
                   <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>

@@ -821,15 +821,31 @@ function renderResult() {
   const result = state.scan.result;
   if (!result) return;
 
-  const unrelated = result.classKey === "other";
-  const guide = SEED_GUIDE[result.classKey] || null;
-  const categoryName = displayCategory(result.classKey, result.displayName);
+  const isUnrelated = result.classKey === "other";
   const confidence = Number(result.confidence) || 0;
-  const lowConfidence = !unrelated && confidence < 0.6;
+  const lowConfidence = confidence < 0.5;
+
+  let displayKey = result.classKey;
+  let categoryName = displayCategory(result.classKey, result.displayName);
+  let guide = SEED_GUIDE[result.classKey] || null;
+
+  if (isUnrelated && result.scores && result.scores.length > 0) {
+    const seedScores = result.scores
+      .filter(s => s.classKey !== "other")
+      .sort((a, b) => b.probability - a.probability);
+    if (seedScores.length > 0) {
+      const topSeed = seedScores[0];
+      displayKey = topSeed.classKey;
+      categoryName = displayCategory(topSeed.classKey, topSeed.displayName);
+      guide = SEED_GUIDE[topSeed.classKey] || null;
+    }
+  }
+
   const sortedScores = result.scores
     .slice()
+    .filter(s => s.classKey !== "other")
     .sort((a, b) => b.probability - a.probability);
-  const topKey = result.classKey;
+  const topKey = displayKey;
 
   const scoresHtml = sortedScores.map((score) => {
     const name = displayCategory(score.classKey, score.displayName);
@@ -842,18 +858,18 @@ function renderResult() {
       </div>`;
   }).join("");
 
-  const explainer = unrelated
-    ? `<p>${escapeHtml(t("unrelatedBody"))}</p>`
-    : `<p>${escapeHtml(t(guide.shortKey))}</p><p>${escapeHtml(t("classDisclaimer"))}</p>`;
+  const explainer = guide
+    ? `<p>${escapeHtml(t(guide.shortKey))}</p><p>${escapeHtml(t("classDisclaimer"))}</p>`
+    : `<p>${escapeHtml(t("lowConfidenceExplainer", { fallback: "The model is uncertain about this seed. Try photographing with better lighting or a clearer background." }))}</p>`;
 
-  const exploreButton = guide
+  const exploreButton = guide && !lowConfidence
     ? `<button class="btn btn-primary" type="button" data-action="explore-guide">
          <svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg>
          <span>${escapeHtml(t("exploreCategory", { name: categoryName }))}</span>
        </button>`
     : `<button class="btn btn-primary" type="button" data-action="try-again">
          <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>
-         <span>${escapeHtml(t("tryAgain"))}</span>
+         <span>${escapeHtml(lowConfidence ? t("retryPhotography") : t("tryAgain"))}</span>
        </button>`;
 
   let saveHtml = "";
@@ -893,14 +909,9 @@ function renderResult() {
       </div>`;
   }
 
-  const imageHtml = state.scan.imageDataUrl
-    ? `<img class="result-image" src="${escapeHtml(state.scan.imageDataUrl)}" alt="${escapeHtml(t("resultImageAlt"))}">`
-    : "";
-
   $("scanResult").innerHTML = `
-    <article class="result-card${unrelated ? " unrelated-result" : ""}">
+    <article class="result-card${lowConfidence ? " low-confidence-result" : ""}">
       <div class="result-hero">
-        ${imageHtml}
         <span class="result-badge">${escapeHtml(t("predictedClass"))}</span>
       </div>
       <div class="result-body">
