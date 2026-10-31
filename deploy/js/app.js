@@ -83,45 +83,88 @@ const CAMERA_MESSAGES = {
   generic: "errorGeneric",
 };
 
-const CHATBOT_RESPONSES = {
-  asili: `The **Asili** category includes traditional and farmer-saved maize types with wide local variation. These seeds are often saved from season to season and adapted to local conditions. They may have diverse characteristics in terms of kernel color, size, and shape.`,
-  chotara: `**Chotara** refers to hybrid maize types bred from selected parent lines. Fresh seed is normally bought each season as they don't breed true to type. These often have more uniform characteristics and are developed for specific traits like yield or disease resistance.`,
-  huria: `**Huria** are open-pollinated improved types. Seed can be saved with careful selection and isolation, but cross-pollination may occur. These were developed to improve upon local varieties while maintaining some ability to save seed.`,
-  unrelated: `The image does not match the Asili, Chotara, or Huria categories. This could be a different type of seed, not a maize kernel, or an image that's unclear. Try photographing one kernel on a plain, contrasting surface with even lighting.`,
-  guide: `I can help you explore the seed guide! I can show you information about the three seed categories (Asili, Chotara, Huria) or the growing guide for different regions in Tanzania. What would you like to know?`,
-  region: `I can help you explore growing guides for Tanzanian regions. I have information about various regions including their ecological zones, soil requirements, planting conditions, seasonal considerations, and seed selection advice. Which region are you interested in?`,
-  default: `I'm the Seed AI Assistant! I can help you with:\n\n• Identifying maize seed categories (Asili, Chotara, Huria)\n• Exploring the seed guide and growing conditions\n• Answering questions about your scan results\n• Providing regional growing guidance for Tanzania\n\nWhat would you like to know?`,
-};
+const GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions";
+const GROQ_CHAT_MODEL = "llama-3.3-70b-versatile";
+const GROQ_API_KEY = (() => {
+  try {
+    const fromWindow = typeof window !== "undefined" ? window.GROQ_API_KEY || window.__SEED_GROQ_KEY__ : "";
+    if (fromWindow) return fromWindow;
+    const fromStorage = typeof window !== "undefined" ? window.localStorage.getItem("seed-groq-key") : "";
+    if (fromStorage) return fromStorage;
+  } catch {
+    // Ignore storage access issues and fall back to the local assistant.
+  }
+  return typeof import.meta !== "undefined" ? import.meta.env?.VITE_GROQ_API_KEY || "" : "";
+})();
+const CHATBOT_SYSTEM_PROMPT = [
+  "You are the Seed AI Assistant of the Seed Classifier app.",
+  "You help farmers and growers in Tanzania understand maize seed categories: Asili (traditional farmer-saved), Chotara (hybrid) and Huria (open-pollinated improved).",
+  "You also answer questions about growing conditions, regions and scan results.",
+  "Keep answers practical, friendly and concise. Use short paragraphs or bullet points when useful.",
+  "Never invent facts about a specific seed variety or certification.",
+].join(" ");
 
-function getChatbotResponse(message) {
-  const lower = (message || "").toLowerCase().trim();
-  if (!lower) return CHATBOT_RESPONSES.default;
+function fallbackChatResponse(message) {
+  const text = String(message || "").toLowerCase();
+  if (/asili|local|traditional/i.test(text)) {
+    return "Asili seed is usually farmer-saved or locally recycled seed. It can be suitable when you want familiar local traits, but quality varies with storage and selection. Clean seed, inspect for vigor, and choose well-filled grains."
+  }
+  if (/chotara|hybrid/i.test(text)) {
+    return "Chotara seed is a hybrid category and is often chosen for stronger vigor and more predictable performance when managed well. Plant according to the recommended spacing and fertilizer advice, and keep seed sources reliable."
+  }
+  if (/huria|improved|opollinat/i.test(text)) {
+    return "Huria seed is an open-pollinated improved category that can work well with careful seed saving and local adaptation. Choose a trusted source and match the seed to the right region and season."
+  }
+  if (/region|zone|rain|soil|planting/i.test(text)) {
+    return "In Tanzania, the best choice depends on rainfall, soil type, and season. Use the regional guide to compare local conditions, then match the seed category to your field conditions and agronomic plan."
+  }
+  if (/how|what|why/i.test(text)) {
+    return "Seed Classifier helps separate maize seed groups by visual appearance and gives practical guidance for growing. For field decisions, combine the scan result with local conditions, seed source quality, and extension advice."
+  }
+  return "I can help with maize seed selection and agronomy. Try asking about Asili, Chotara, Huria, growing conditions, or what a scan result means for your field."
+}
 
-  if (
-    lower.includes("asili") ||
-    lower.includes("traditional") ||
-    lower.includes("farmer-saved")
-  )
-    return CHATBOT_RESPONSES.asili;
-  if (
-    lower.includes("chotara") ||
-    lower.includes("hybrid") ||
-    lower.includes("parent lines")
-  )
-    return CHATBOT_RESPONSES.chotara;
-  if (
-    lower.includes("huria") ||
-    lower.includes("improved types") ||
-    lower.includes("open-pollinated")
-  )
-    return CHATBOT_RESPONSES.huria;
-  if (lower.includes("unrelated") || lower.includes("not match"))
-    return CHATBOT_RESPONSES.unrelated;
-  if (lower.includes("guide") || lower.includes("seed guide"))
-    return CHATBOT_RESPONSES.guide;
-  if (lower.includes("region") || lower.includes("tanzania"))
-    return CHATBOT_RESPONSES.region;
-  return CHATBOT_RESPONSES.default;
+async function getChatbotResponse(message, historyMessages = []) {
+  if (!GROQ_API_KEY) return fallbackChatResponse(message);
+
+  const messages = [
+    { role: "system", content: CHATBOT_SYSTEM_PROMPT },
+    ...historyMessages.map((entry) => ({
+      role: entry.sender === "user" ? "user" : "assistant",
+      content: entry.text,
+    })),
+    { role: "user", content: message },
+  ];
+
+  try {
+    const response = await fetch(GROQ_CHAT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${GROQ_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: GROQ_CHAT_MODEL,
+        temperature: 0.6,
+        max_tokens: 700,
+        messages,
+      }),
+    });
+
+    if (!response.ok) {
+      const fallback = fallbackChatResponse(message);
+      console.warn(`Groq API unavailable (${response.status}); using local fallback.`);
+      return fallback;
+    }
+
+    const data = await response.json();
+    const content = data?.choices?.[0]?.message?.content;
+    if (!content) throw new Error("Groq chat returned an empty response");
+    return content;
+  } catch (error) {
+    console.error("Seed AI Assistant request failed:", error);
+    return fallbackChatResponse(message);
+  }
 }
 
 function formatChatMarkdown(text) {
@@ -413,7 +456,8 @@ function applyRoute(options = {}) {
       state.regionId = route.regionId || null;
     }
   } else if (route.screen === "chat") {
-    renderChat();
+    openChat();
+    return;
   }
 
   showScreen(state.screen);
@@ -1482,6 +1526,9 @@ function renderInstallState() {
   const card = $("homeInstallCard");
   if (card) card.hidden = installed || !available;
 
+  const installTop = $("installBtn");
+  if (installTop) installTop.hidden = installed || !available;
+
   const button = $("settingsInstallBtn");
   const status = $("installStatusText");
   const note = $("installPromptNote");
@@ -1646,6 +1693,7 @@ function askConfirm(title, text, confirmLabel, danger = true) {
 function bindDialogEvents() {
   const confirmDialog = $("confirmDialog");
   const historyDialog = $("historyDialog");
+  const chatDialog = $("chatDialog");
 
   $("confirmCancel").addEventListener("click", () => confirmDialog.close("cancel"));
   $("confirmOk").addEventListener("click", () => confirmDialog.close("confirm"));
@@ -1656,7 +1704,8 @@ function bindDialogEvents() {
   });
 
   $("historyDialogClose").addEventListener("click", () => historyDialog.close());
-  [confirmDialog, historyDialog].forEach((dialog) => {
+  $("chatDialogClose").addEventListener("click", () => closeChat());
+  [confirmDialog, historyDialog, chatDialog].forEach((dialog) => {
     dialog.addEventListener("click", (event) => {
       if (event.target === dialog) dialog.close("cancel");
     });
@@ -1689,6 +1738,15 @@ function bindEvents() {
     }
   });
 
+  $$(".nav-item").forEach((item) => {
+    item.addEventListener("click", (event) => {
+      if (item.dataset.nav === "chat") {
+        event.preventDefault();
+        openChat();
+      }
+    });
+  });
+
   $("heroScanBtn").addEventListener("click", () => {
     window.location.hash = "#scan";
   });
@@ -1698,8 +1756,7 @@ function bindEvents() {
   $("homeRegionBtn").addEventListener("click", () => {
     window.location.hash = "#guide/regions";
   });
-  $("homeInstallBtn").addEventListener("click", requestInstall);
-  $("settingsInstallBtn").addEventListener("click", requestInstall);
+  if ($("installBtn")) $("installBtn").addEventListener("click", requestInstall);
 
   $("homeQuickRegions").addEventListener("click", (event) => {
     const button = event.target.closest("[data-quick-region]");
@@ -1877,24 +1934,55 @@ async function sendChatMessage() {
   const message = input.value.trim();
   if (!message) return;
 
+  const historyMessages = state.chat.messages.map((entry) => ({
+    sender: entry.sender,
+    text: entry.text,
+  }));
+
   // Add user message
   state.chat.messages.push({ text: message, sender: "user" });
   addMessage(message, "user");
   input.value = "";
+  setChatBusy(true);
 
-  // Get bot response
-  const response = getChatbotResponse(message);
+  // Get bot response from the Groq API
+  const response = await getChatbotResponse(message, historyMessages);
   state.chat.messages.push({ text: response, sender: "bot" });
   addMessage(response, "bot");
+  setChatBusy(false);
 
   // Focus input again
   input.focus();
+}
+
+function setChatBusy(busy) {
+  const sendButton = $("sendBtn");
+  if (sendButton) sendButton.disabled = busy;
 }
 
 function clearChat() {
   state.chat.messages = [];
   renderChat();
   showToast(t("clearChat"));
+}
+
+function openChat() {
+  state.screen = "chat";
+  showScreen("chat");
+  const dialog = $("chatDialog");
+  if (!dialog) return;
+  renderChat();
+  if (!dialog.open) dialog.showModal();
+}
+
+function closeChat() {
+  const dialog = $("chatDialog");
+  if (dialog && dialog.open) dialog.close();
+  try {
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+  } catch {
+    /* ignore history errors */
+  }
 }
 
 /* --------------------------------------------------------------------------

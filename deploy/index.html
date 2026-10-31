@@ -177,15 +177,6 @@
           </div>
         </section>
 
-        <section class="install-card" id="homeInstallCard" hidden>
-          <span class="install-card-icon"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
-          <div class="install-card-body">
-            <h3 data-i18n="installTitle">Install Seed Classifier</h3>
-            <p data-i18n="installBody">Add Seed Classifier to your home screen for quick, full-screen access and offline use.</p>
-          </div>
-          <button class="btn btn-secondary" id="homeInstallBtn" type="button" data-i18n="installButton">Install app</button>
-        </section>
-
         <p class="home-note" data-i18n="privacyNoteHome">Seed Classifier runs on your device. Scan history and photos stay in your browser unless you delete them.</p>
       </section>
 
@@ -383,34 +374,36 @@
       </section>
 
       <!-- CHAT -->
-      <section class="screen" id="screen-chat" data-screen="chat" aria-labelledby="chat-title" hidden>
-        <header class="page-head">
-          <div class="page-head-row">
-            <div>
+      <dialog class="dialog chat-dialog" id="chatDialog" aria-labelledby="chatDialogTitle">
+        <div class="dialog-inner chat-dialog-inner">
+          <div class="chat-head">
+            <div class="chat-head-copy">
               <span class="eyebrow" data-i18n="navChat">Chat</span>
-              <h1 class="page-title" id="chat-title" data-i18n="chatTitle">Seed AI Assistant</h1>
-              <p class="page-sub" data-i18n="chatSubtitle">Ask me anything about maize seeds, growing, or your scan results.</p>
+              <h2 class="dialog-title" id="chatDialogTitle" data-i18n="chatTitle">Seed AI Assistant</h2>
             </div>
-            <button class="btn btn-danger-soft" id="clearChatBtn" type="button">
-              <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
-              <span data-i18n="clearChat">Clear chat</span>
-            </button>
+            <div class="chat-head-actions">
+              <button class="btn btn-quiet" id="clearChatBtn" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
+                <span data-i18n="clearChat">Clear chat</span>
+              </button>
+              <button class="icon-button dialog-close" id="chatDialogClose" type="button" data-i18n-aria-label="close" aria-label="Close">
+                <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+              </button>
+            </div>
           </div>
-        </header>
 
-        <div class="chat-container">
           <div class="chat-window" id="chatWindow" aria-live="polite" aria-atomic="true">
             <!-- Chat messages will be inserted here -->
           </div>
 
           <div class="chat-input-wrapper">
-            <input type="text" id="chatInput" data-i18n-placeholder="chatInputPlaceholder" data-i18n-aria-label="chatInputLabel" placeholder="Ask a question about seeds or growing…" autocomplete="off" />
+            <input type="text" id="chatInput" data-i18n-placeholder="chatInputPlaceholder" data-i18n-aria-label="chatInputLabel" placeholder="Ask a question about seeds or growing" autocomplete="off" />
             <button class="btn btn-primary" id="sendBtn" type="button" data-i18n-aria-label="sendChatMessage" aria-label="Send message">
               <svg class="icon" aria-hidden="true"><use href="#i-send"></use></svg>
             </button>
           </div>
         </div>
-      </section>
+      </dialog>
 
       <!-- SETTINGS -->
       <section class="screen" id="screen-settings" data-screen="settings" aria-labelledby="settings-title" hidden>
@@ -444,34 +437,6 @@
               <span data-i18n="prepareOffline">Prepare offline use</span>
             </button>
             <p class="history-note" id="storageInfo"></p>
-          </section>
-
-          <section class="settings-card wide">
-            <h2 data-i18n="installSectionTitle">Install Seed Classifier</h2>
-            <p data-i18n="installSectionBody">Installing adds Seed Classifier to your home screen and opens it in its own window.</p>
-            <div class="status-line" id="installStatusLine">
-              <span class="dot"></span>
-              <span id="installStatusText" data-i18n="notInstalledStatus">Not installed yet</span>
-            </div>
-            <button class="btn btn-primary" id="settingsInstallBtn" type="button" style="margin-top:0.5rem">
-              <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
-              <span data-i18n="installButton">Install app</span>
-            </button>
-            <p class="history-note" id="installPromptNote" data-i18n="installUnavailable">This browser has not offered an automatic install prompt. Follow the instructions for your device.</p>
-            <div class="install-steps">
-              <div class="install-step">
-                <span class="install-step-num">1</span>
-                <div><strong data-i18n="installIosTitle">On iPhone or iPad</strong><span data-i18n="installIosBody">Open Seed Classifier in Safari, tap the Share button, then choose “Add to Home Screen”.</span></div>
-              </div>
-              <div class="install-step">
-                <span class="install-step-num">2</span>
-                <div><strong data-i18n="installAndroidTitle">On Android</strong><span data-i18n="installAndroidBody">Open the browser menu and choose “Install app” or “Add to Home screen”.</span></div>
-              </div>
-              <div class="install-step">
-                <span class="install-step-num">3</span>
-                <div><strong data-i18n="installDesktopTitle">On a computer</strong><span data-i18n="installDesktopBody">Use the install icon in the browser address bar, or the browser menu, to install Seed Classifier.</span></div>
-              </div>
-            </div>
           </section>
 
           <section class="settings-card">
@@ -528,7 +493,9 @@
       <button class="btn btn-secondary" id="updateBtn" type="button" data-i18n="updateNow">Update now</button>
     </div>
 
-    <footer class="site-foot" data-i18n="footerDisclaimer">Seed Classifier supports decisions; it does not certify seed authenticity, quality or suitability. Always check the seed label and local extension advice.</footer>
+    <footer class="site-foot">
+      <span data-i18n="footerDisclaimer">Seed Classifier supports decisions; it does not certify seed authenticity, quality or suitability. Always check the seed label and local extension advice.</span>
+    </footer>
 
     <nav class="bottom-nav" aria-label="Main navigation">
       <a class="nav-item" href="#home" data-nav="home">
