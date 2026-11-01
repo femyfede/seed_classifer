@@ -780,7 +780,7 @@ function renderResult() {
 
   const confidence = Number(result.confidence) || 0;
   const isUnrelated = result.classKey === "other";
-  const lowConfidence = confidence < 0.65;
+  const lowConfidence = confidence < 0.75;
   const unknownSeed = isUnrelated || lowConfidence;
 
   let displayKey = result.classKey;
@@ -788,14 +788,10 @@ function renderResult() {
   let guide = unknownSeed ? null : SEED_GUIDE[result.classKey] || null;
 
   const explainer = unknownSeed
-    ? `<p>${escapeHtml(t("unrelatedBody"))}</p>`
+    ? ``
     : guide
-    ? `<div class="guide-section">
-         <p>${escapeHtml(t(guide.shortKey))}</p>
-         <p class="confidence-note" style="margin-top:0.8rem;font-size:0.85rem;color:var(--ink-soft);">${escapeHtml(t("classDisclaimer"))}</p>
-         <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--ink-soft);">💡 ${escapeHtml(t("photoTip", { fallback: "For more accurate results: use clear lighting, plain background, one seed in focus, and consider scanning multiple seeds." }))}</p>
-       </div>`
-    : `<p>${escapeHtml(t("lowConfidenceExplainer", { fallback: "The model is uncertain about this seed. Try photographing with better lighting or a clearer background." }))}</p>`;
+    ? `<p style="font-size:0.9rem;color:var(--ink-soft)">${escapeHtml(t(guide.shortKey))}</p>`
+    : ``;
 
   const exploreButton = guide && !lowConfidence
     ? `<button class="btn btn-primary" type="button" data-action="explore-guide">
@@ -846,23 +842,14 @@ function renderResult() {
 
   $("scanResult").innerHTML = `
     <article class="result-card${lowConfidence ? " low-confidence-result" : ""}">
-      <div class="result-hero">
-        <span class="result-badge">${escapeHtml(t("predictedClass"))}</span>
-      </div>
-      <div class="result-body">
-        <div class="result-kicker">
-          <svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg>
-          <span>${escapeHtml(t("resultTitle"))}</span>
-        </div>
-        <h2 class="result-class" id="resultClassTitle" tabindex="-1">${escapeHtml(categoryName)}</h2>
-
-        <div class="result-explainer">${explainer}</div>
+      <div class="result-body" style="text-align:center;padding:2rem">
+        <h2 class="result-class" id="resultClassTitle" tabindex="-1" style="font-size:2.5rem;margin:1rem 0">${escapeHtml(categoryName)}</h2>
+        ${unknownSeed ? `<p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:1.5rem">${escapeHtml(t("unrelatedBody"))}</p>` : ''}
         ${saveHtml}
 
-        <div class="result-actions">
-          ${exploreButton}
-          <button class="btn btn-secondary" type="button" data-action="scan-another">
-            <svg class="icon" aria-hidden="true"><use href="#i-refresh"></use></svg>
+        <div class="result-actions" style="margin-top:1.5rem">
+          <button class="btn btn-primary" type="button" data-action="scan-another">
+            <svg class="icon" aria-hidden="true"><use href="#i-camera"></use></svg>
             <span>${escapeHtml(t("scanAnother"))}</span>
           </button>
         </div>
