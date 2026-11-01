@@ -1705,9 +1705,19 @@ function bindEvents() {
 
   $$(".nav-item").forEach((item) => {
     item.addEventListener("click", (event) => {
-      if (item.dataset.nav === "chat") {
-        event.preventDefault();
+      event.preventDefault();
+      const nav = item.dataset.nav;
+
+      if (nav === "chat") {
         openChat();
+        return;
+      }
+
+      const nextHash = `#${nav}`;
+      if (window.location.hash === nextHash) {
+        applyRoute({ focus: false });
+      } else {
+        window.location.hash = nextHash;
       }
     });
   });
@@ -1935,15 +1945,24 @@ function openChat() {
   state.screen = "chat";
   showScreen("chat");
   const dialog = $("chatDialog");
-  if (!dialog) return;
+  if (dialog && !dialog.open) {
+    dialog.showModal();
+  }
+  if (window.location.hash !== "#chat") {
+    window.location.hash = "#chat";
+  }
   renderChat();
-  if (!dialog.open) dialog.showModal();
 }
 
 function closeChat() {
   const dialog = $("chatDialog");
   if (dialog && dialog.open) dialog.close();
-  window.location.hash = "#home";
+  const nextHash = state.screen === "chat" ? "#home" : window.location.hash || "#home";
+  if (window.location.hash !== nextHash) {
+    window.location.hash = nextHash;
+  } else if (state.screen === "chat") {
+    window.location.hash = "#home";
+  }
 }
 
 /* --------------------------------------------------------------------------
