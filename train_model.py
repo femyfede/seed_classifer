@@ -446,8 +446,8 @@ def main():
     model = SeedCNN(len(classes), width=args.width).to(device)
 
     # Compute class weights to handle imbalance
-    class_counts = np.bincount(train_labels, minlength=len(classes))
-    class_weights = torch.tensor(len(train_labels) / (len(classes) * (class_counts + 1e-8)),
+    class_counts = np.bincount(train_ds.labels, minlength=len(classes))
+    class_weights = torch.tensor(len(train_ds.labels) / (len(classes) * (class_counts + 1e-8)),
                                   dtype=torch.float32, device=device)
     print(f"Class weights: {class_weights.tolist()}")
 
