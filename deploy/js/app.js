@@ -787,23 +787,6 @@ function renderResult() {
   let categoryName = unknownSeed ? t("unrelatedTitle") : displayCategory(result.classKey, result.displayName);
   let guide = unknownSeed ? null : SEED_GUIDE[result.classKey] || null;
 
-  const sortedScores = result.scores
-    .slice()
-    .filter(s => unknownSeed || s.classKey !== "other")
-    .sort((a, b) => b.probability - a.probability);
-  const topKey = displayKey;
-
-  const scoresHtml = sortedScores.map((score) => {
-    const name = score.classKey === "other" ? t("unrelatedTitle") : displayCategory(score.classKey, score.displayName);
-    const pct = Math.max(0, Math.min(1, Number(score.probability) || 0)) * 100;
-    return `
-      <div class="score-row${score.classKey === topKey ? " is-top" : ""}">
-        <span class="score-name">${escapeHtml(name)}</span>
-        <span class="score-bar"><span class="score-fill" style="width:${pct.toFixed(2)}%"></span></span>
-        <span class="score-value">${escapeHtml(formatPercent(score.probability))}</span>
-      </div>`;
-  }).join("");
-
   const explainer = unknownSeed
     ? `<p>${escapeHtml(t("unrelatedBody"))}</p>`
     : guide
@@ -868,21 +851,6 @@ function renderResult() {
           <span>${escapeHtml(t("resultTitle"))}</span>
         </div>
         <h2 class="result-class" id="resultClassTitle" tabindex="-1">${escapeHtml(categoryName)}</h2>
-
-        <div class="confidence-block">
-          <div class="confidence-top">
-            <span class="confidence-label">${escapeHtml(t("confidence"))}</span>
-            <strong class="confidence-number">${escapeHtml(formatPercent(confidence))}</strong>
-          </div>
-          <div class="confidence-track">
-            <div class="confidence-fill${lowConfidence ? " low" : ""}" style="width:${(confidence * 100).toFixed(2)}%"></div>
-          </div>
-          <p class="confidence-note">${escapeHtml(t("confidenceDisclaimer"))}</p>
-          ${lowConfidence ? `<div class="low-confidence">${escapeHtml(t("lowConfidence"))}</div>` : ""}
-        </div>
-
-        <p class="confidence-label">${escapeHtml(t("classProbabilities"))}</p>
-        <div class="score-list">${scoresHtml}</div>
 
         <div class="result-explainer">${explainer}</div>
         ${saveHtml}
