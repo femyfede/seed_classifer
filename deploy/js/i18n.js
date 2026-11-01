@@ -127,6 +127,8 @@ export const TRANSLATIONS = {
       "This is the model's confidence, not proof that a seed is genuine, certified or safe to plant.",
     lowConfidence:
       "Confidence is low. Try another photo with one seed, better light and a plain background.",
+    photoTip:
+      "For best results: use clear lighting, a plain contrasting background, one seed in sharp focus, and consider scanning multiple seeds for comparison.",
     lowConfidenceExplainer:
       "The model is uncertain about this seed. Try photographing with better lighting or a clearer background.",
     retryPhotography: "Retry with better photo",
@@ -470,6 +472,8 @@ export const TRANSLATIONS = {
       "Uhakika ni mdogo. Jaribu picha nyingine yenye mbegu moja, mwanga bora na mandhari tambarare.",
     lowConfidenceExplainer:
       "Modeli si hakika kuhusu mbegu hii. Jaribu kupiga picha kwa mwanga bora au mandhari safi.",
+    photoTip:
+      "Kwa matokeo bora: tumia mwanga safi, mandhari tambarare yanayokamatia, mbegu moja iliyozingatiwa vizuri, na fikiria kupiga picha ya mbegu kadhaa kwa kulinganisha.",
     retryPhotography: "Jaribu tena na picha nzuri",
     classProbabilities: "Alama za aina zote",
     resultImageAlt: "Picha iliyotumika kwa utambuzi huu",

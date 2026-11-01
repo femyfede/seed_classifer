@@ -790,7 +790,11 @@ function renderResult() {
   const explainer = unknownSeed
     ? `<p>${escapeHtml(t("unrelatedBody"))}</p>`
     : guide
-    ? `<p>${escapeHtml(t(guide.shortKey))}</p><p>${escapeHtml(t("classDisclaimer"))}</p>`
+    ? `<div class="guide-section">
+         <p>${escapeHtml(t(guide.shortKey))}</p>
+         <p class="confidence-note" style="margin-top:0.8rem;font-size:0.85rem;color:var(--ink-soft);">${escapeHtml(t("classDisclaimer"))}</p>
+         <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--ink-soft);">💡 ${escapeHtml(t("photoTip", { fallback: "For more accurate results: use clear lighting, plain background, one seed in focus, and consider scanning multiple seeds." }))}</p>
+       </div>`
     : `<p>${escapeHtml(t("lowConfidenceExplainer", { fallback: "The model is uncertain about this seed. Try photographing with better lighting or a clearer background." }))}</p>`;
 
   const exploreButton = guide && !lowConfidence
