@@ -778,34 +778,23 @@ function renderResult() {
   const result = state.scan.result;
   if (!result) return;
 
-  const isUnrelated = result.classKey === "other";
   const confidence = Number(result.confidence) || 0;
-  const lowConfidence = confidence < 0.5;
+  const isUnrelated = result.classKey === "other";
+  const lowConfidence = confidence < 0.65;
+  const unknownSeed = isUnrelated || lowConfidence;
 
   let displayKey = result.classKey;
-  let categoryName = displayCategory(result.classKey, result.displayName);
-  let guide = SEED_GUIDE[result.classKey] || null;
-
-  if (isUnrelated && result.scores && result.scores.length > 0) {
-    const seedScores = result.scores
-      .filter(s => s.classKey !== "other")
-      .sort((a, b) => b.probability - a.probability);
-    if (seedScores.length > 0) {
-      const topSeed = seedScores[0];
-      displayKey = topSeed.classKey;
-      categoryName = displayCategory(topSeed.classKey, topSeed.displayName);
-      guide = SEED_GUIDE[topSeed.classKey] || null;
-    }
-  }
+  let categoryName = unknownSeed ? t("unrelatedTitle") : displayCategory(result.classKey, result.displayName);
+  let guide = unknownSeed ? null : SEED_GUIDE[result.classKey] || null;
 
   const sortedScores = result.scores
     .slice()
-    .filter(s => s.classKey !== "other")
+    .filter(s => unknownSeed || s.classKey !== "other")
     .sort((a, b) => b.probability - a.probability);
   const topKey = displayKey;
 
   const scoresHtml = sortedScores.map((score) => {
-    const name = displayCategory(score.classKey, score.displayName);
+    const name = score.classKey === "other" ? t("unrelatedTitle") : displayCategory(score.classKey, score.displayName);
     const pct = Math.max(0, Math.min(1, Number(score.probability) || 0)) * 100;
     return `
       <div class="score-row${score.classKey === topKey ? " is-top" : ""}">
@@ -815,7 +804,9 @@ function renderResult() {
       </div>`;
   }).join("");
 
-  const explainer = guide
+  const explainer = unknownSeed
+    ? `<p>${escapeHtml(t("unrelatedBody"))}</p>`
+    : guide
     ? `<p>${escapeHtml(t(guide.shortKey))}</p><p>${escapeHtml(t("classDisclaimer"))}</p>`
     : `<p>${escapeHtml(t("lowConfidenceExplainer", { fallback: "The model is uncertain about this seed. Try photographing with better lighting or a clearer background." }))}</p>`;
 
