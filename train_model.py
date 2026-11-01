@@ -444,7 +444,14 @@ def main():
                              num_workers=args.workers)
 
     model = SeedCNN(len(classes), width=args.width).to(device)
-    criterion = nn.CrossEntropyLoss(label_smoothing=0.05)
+
+    # Compute class weights to handle imbalance
+    class_counts = np.bincount(train_labels, minlength=len(classes))
+    class_weights = torch.tensor(len(train_labels) / (len(classes) * (class_counts + 1e-8)),
+                                  dtype=torch.float32, device=device)
+    print(f"Class weights: {class_weights.tolist()}")
+
+    criterion = nn.CrossEntropyLoss(weight=class_weights, label_smoothing=0.05)
     optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-4)
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=args.epochs)
 
