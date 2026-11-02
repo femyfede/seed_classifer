@@ -1,8 +1,10 @@
 # Deploying Seed Classifier
 
 The app is a **static site** in [`deploy/`](deploy/) — `index.html`,
-`preprocess.js`, `seed_classifier.onnx`, `classes.json`, `model_meta.json`, and
-the vendored ONNX Runtime in `deploy/vendor/`. No build step is required.
+`preprocess.js`, `seed_classifier.onnx` and its external weights file
+`seed_classifier.onnx.data`, `classes.json`, `model_meta.json`, and the
+vendored ONNX Runtime in `deploy/vendor/`. Keep the ONNX file and its `.data`
+weights sidecar together. No build step is required.
 
 > **Important:** the app must be served over **HTTP(S)**. Opening `index.html`
 > directly (`file://`) is blocked by the browser. Any static host below works
@@ -171,10 +173,10 @@ App Store download or an APK.
 
 ## Updating the model
 
-After retraining, copy the artifacts and redeploy:
+After retraining, run the deployment script from the repository root. It checks
+that all model artifacts, including the ONNX external weights sidecar, exist,
+copies them into `deploy/`, and commits and pushes the deployment:
 
 ```bash
-copy model\seed_classifier.onnx deploy\
-copy model\classes.json        deploy\
-copy model\model_meta.json     deploy\
+bash deploy_model.sh
 ```

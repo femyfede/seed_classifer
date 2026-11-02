@@ -11,6 +11,7 @@
  */
 const META_URL = new URL("../model_meta.json", import.meta.url);
 const MODEL_URL = new URL("../seed_classifier.onnx", import.meta.url);
+const MODEL_DATA_URL = new URL("../seed_classifier.onnx.data", import.meta.url);
 const VENDOR_URL = new URL("../vendor/", import.meta.url);
 
 export class InferenceError extends Error {
@@ -119,10 +120,30 @@ export async function loadModel() {
     if (buffer.byteLength < 1024) {
       throw new InferenceError("model-empty", "The model file appears to be empty.");
     }
+    let dataResponse;
+    try {
+      dataResponse = await fetch(MODEL_DATA_URL, { cache: "no-cache" });
+    } catch (error) {
+      throw new InferenceError("model-data-network", "Could not download the model weights.", error);
+    }
+    if (!dataResponse.ok) {
+      throw new InferenceError(
+        "model-data-http",
+        `The model weights returned ${dataResponse.status}.`
+      );
+    }
+    const externalData = new Uint8Array(await dataResponse.arrayBuffer());
+    if (!externalData.byteLength) {
+      throw new InferenceError("model-data-empty", "The model weights file appears to be empty.");
+    }
     try {
       session = await window.ort.InferenceSession.create(buffer, {
         executionProviders: ["wasm"],
         graphOptimizationLevel: "all",
+        externalData: [{
+          path: "seed_classifier.onnx.data",
+          data: externalData,
+        }],
       });
       return session;
     } catch (error) {

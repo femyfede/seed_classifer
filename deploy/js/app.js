@@ -44,7 +44,7 @@ import {
 } from "./inference.js";
 import * as pwa from "./pwa.js";
 
-const APP_VERSION = "1.0.6";
+const APP_VERSION = "1.0.7";
 const GUIDE_CATEGORIES = ["local", "chotara", "huria"];
 const SCREEN_IDS = {
   home: "screen-home",

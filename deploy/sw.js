@@ -1,5 +1,5 @@
 /* Seed Classifier offline service worker — relative paths support subdirectory hosting. */
-const CACHE_VERSION = "seedyai-v1.0.6";
+const CACHE_VERSION = "seedyai-v1.0.7";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -38,6 +38,7 @@ const OFFLINE_ASSETS = [
   "./model_meta.json",
   "./classes.json",
   "./seed_classifier.onnx",
+  "./seed_classifier.onnx.data",
   "./vendor/ort.min.js",
   "./vendor/ort-wasm-simd-threaded.wasm",
   "./vendor/ort-wasm-simd-threaded.mjs",
@@ -45,6 +46,7 @@ const OFFLINE_ASSETS = [
 
 const CACHE_FIRST = new Set([
   "./seed_classifier.onnx",
+  "./seed_classifier.onnx.data",
   "./model_meta.json",
   "./classes.json",
   "./vendor/ort.min.js",

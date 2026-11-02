@@ -177,6 +177,9 @@ export async function checkOfflineAssets() {
     caches.match(new URL("../seed_classifier.onnx", import.meta.url).href, {
       ignoreSearch: true,
     }),
+    caches.match(new URL("../seed_classifier.onnx.data", import.meta.url).href, {
+      ignoreSearch: true,
+    }),
     caches.match(new URL("../vendor/ort-wasm-simd-threaded.wasm", import.meta.url).href, {
       ignoreSearch: true,
     }),
@@ -184,9 +187,9 @@ export async function checkOfflineAssets() {
   ]);
   return {
     supported: true,
-    model: Boolean(checks[0]),
-    runtime: Boolean(checks[1]),
-    shell: Boolean(checks[2]),
+    model: Boolean(checks[0] && checks[1]),
+    runtime: Boolean(checks[2]),
+    shell: Boolean(checks[3]),
   };
 }
 
