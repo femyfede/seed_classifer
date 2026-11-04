@@ -780,8 +780,14 @@ function renderResult() {
 
   const confidence = Number(result.confidence) || 0;
   const isUnrelated = result.classKey === "other";
-  const lowConfidence = confidence < 0.75;
-  const unknownSeed = isUnrelated || lowConfidence;
+  const lowConfidence = confidence < 0.85;
+
+  // Check if top 2 predictions are too close (poor distinction)
+  const scores = result.scores ? result.scores.slice().sort((a, b) => b.probability - a.probability) : [];
+  const confidenceGap = scores.length > 1 ? (scores[0].probability - scores[1].probability) : 1;
+  const poorDistinction = confidenceGap < 0.15; // If top 2 are within 15%, don't trust it
+
+  const unknownSeed = isUnrelated || lowConfidence || poorDistinction;
 
   let displayKey = result.classKey;
   let categoryName = unknownSeed ? t("unrelatedTitle") : displayCategory(result.classKey, result.displayName);
