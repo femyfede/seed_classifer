@@ -44,14 +44,15 @@ static int getImageData(
 
     size_t byteIndex = offset * IMAGE_CHANNELS;
 
+    // fmt2rgb888() writes pixels in B, G, R order.
     for (size_t index = 0; index < length; index++) {
-        const uint8_t red =
+        const uint8_t blue =
             modelWorkingBuffer[byteIndex];
 
         const uint8_t green =
             modelWorkingBuffer[byteIndex + 1];
 
-        const uint8_t blue =
+        const uint8_t red =
             modelWorkingBuffer[byteIndex + 2];
 
         outputPtr[index] = static_cast<float>(
@@ -64,6 +65,87 @@ static int getImageData(
     }
 
     return 0;
+}
+
+static float clamp01(float value)
+{
+    if (value < 0.0f) return 0.0f;
+    if (value > 1.0f) return 1.0f;
+    return value;
+}
+
+// Classifies by kernel colour: yellow kernels -> Asili, white/cream -> Chotara.
+// "Yellowness" = ((R + G) / 2 - B) / max(R, G, B); plain white cloth is ~0.03.
+static PredictionResult classifyByColor(const uint8_t *bgr)
+{
+    PredictionResult prediction;
+    prediction.label = "unknown";
+    prediction.confidence = 0.0f;
+    prediction.valid = false;
+
+    uint32_t sampled = 0;
+    uint32_t seedPixels = 0;
+    uint32_t yellowPixels = 0;
+    uint64_t sumR = 0, sumG = 0, sumB = 0;
+
+    for (uint32_t y = 0; y < RAW_IMAGE_HEIGHT; y += 2) {
+        for (uint32_t x = 0; x < RAW_IMAGE_WIDTH; x += 2) {
+            const uint8_t *p = bgr + (y * RAW_IMAGE_WIDTH + x) * IMAGE_CHANNELS;
+            const int b = p[0], g = p[1], r = p[2];
+            const int mx = max(r, max(g, b));
+            sampled++;
+
+            if (mx < COLOR_MIN_BRIGHTNESS) continue;
+
+            const float yellowness = ((r + g) * 0.5f - b) / static_cast<float>(mx);
+            if (yellowness < COLOR_SEED_YELLOWNESS) continue;
+
+            seedPixels++;
+            sumR += r; sumG += g; sumB += b;
+            if (yellowness >= COLOR_YELLOW_YELLOWNESS) yellowPixels++;
+        }
+    }
+
+    const float seedFraction = static_cast<float>(seedPixels) / static_cast<float>(sampled);
+
+    Serial.println();
+    Serial.println("========== COLOR CLASSIFIER ==========");
+    Serial.printf("Seed pixels:   %.1f%% of frame\n", seedFraction * 100.0f);
+
+    if (seedFraction < COLOR_MIN_SEED_FRACTION) {
+        prediction.label = "unrelated";
+        prediction.confidence = 1.0f;
+        prediction.valid = true;
+        Serial.println("Result:        no seed in view");
+        Serial.println("======================================");
+        return prediction;
+    }
+
+    const float yellowShare = static_cast<float>(yellowPixels) / static_cast<float>(seedPixels);
+    const float asiliScore = clamp01(
+        (yellowShare - COLOR_SHARE_CHOTARA) /
+        (COLOR_SHARE_ASILI - COLOR_SHARE_CHOTARA)
+    );
+
+    Serial.printf("Seed mean RGB: %u %u %u\n",
+        static_cast<unsigned int>(sumR / seedPixels),
+        static_cast<unsigned int>(sumG / seedPixels),
+        static_cast<unsigned int>(sumB / seedPixels));
+    Serial.printf("Yellow share:  %.3f (Chotara<=%.2f, Asili>=%.2f)\n",
+        yellowShare, COLOR_SHARE_CHOTARA, COLOR_SHARE_ASILI);
+
+    if (asiliScore >= 0.5f) {
+        prediction.label = "Asili";
+        prediction.confidence = asiliScore;
+    } else {
+        prediction.label = "Chotara";
+        prediction.confidence = 1.0f - asiliScore;
+    }
+    prediction.valid = prediction.confidence >= CONFIDENCE_THRESHOLD;
+
+    Serial.printf("Result:        %s %.1f%%\n", prediction.label.c_str(), prediction.confidence * 100.0f);
+    Serial.println("======================================");
+    return prediction;
 }
 
 bool initInference()
@@ -296,6 +378,10 @@ PredictionResult runSeedInference()
 
         return prediction;
     }
+
+#if CLASSIFIER_USE_COLOR
+    return classifyByColor(cameraImageBuffer);
+#endif
 
     memset(
         modelWorkingBuffer,
