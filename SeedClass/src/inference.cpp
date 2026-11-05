@@ -87,6 +87,7 @@ static PredictionResult classifyByColor(const uint8_t *bgr)
     uint32_t seedPixels = 0;
     uint32_t yellowPixels = 0;
     uint64_t sumR = 0, sumG = 0, sumB = 0;
+    uint64_t frameR = 0, frameG = 0, frameB = 0;
 
     for (uint32_t y = 0; y < RAW_IMAGE_HEIGHT; y += 2) {
         for (uint32_t x = 0; x < RAW_IMAGE_WIDTH; x += 2) {
@@ -94,6 +95,7 @@ static PredictionResult classifyByColor(const uint8_t *bgr)
             const int b = p[0], g = p[1], r = p[2];
             const int mx = max(r, max(g, b));
             sampled++;
+            frameR += r; frameG += g; frameB += b;
 
             if (mx < COLOR_MIN_BRIGHTNESS) continue;
             if (r < COLOR_MIN_RED_GREEN * g) continue;
@@ -111,6 +113,10 @@ static PredictionResult classifyByColor(const uint8_t *bgr)
 
     Serial.println();
     Serial.println("========== COLOR CLASSIFIER ==========");
+    Serial.printf("Frame mean RGB: %u %u %u\n",
+        static_cast<unsigned int>(frameR / sampled),
+        static_cast<unsigned int>(frameG / sampled),
+        static_cast<unsigned int>(frameB / sampled));
     Serial.printf("Seed pixels:   %.1f%% of frame\n", seedFraction * 100.0f);
 
     if (seedFraction < COLOR_MIN_SEED_FRACTION) {
@@ -147,6 +153,27 @@ static PredictionResult classifyByColor(const uint8_t *bgr)
     Serial.printf("Result:        %s %.1f%%\n", prediction.label.c_str(), prediction.confidence * 100.0f);
     Serial.println("======================================");
     return prediction;
+}
+
+void dumpFrameIfRequested()
+{
+    if (!Serial.available() || Serial.read() != 'p') {
+        return;
+    }
+
+    camera_fb_t *frame = esp_camera_fb_get();
+    if (frame == nullptr) {
+        Serial.println("JPEG_ERROR");
+        return;
+    }
+
+    Serial.printf("\nJPEG_START %u\n", static_cast<unsigned int>(frame->len));
+    for (size_t i = 0; i < frame->len; i++) {
+        Serial.printf("%02x", frame->buf[i]);
+        if ((i % 64) == 63) Serial.println();
+    }
+    Serial.println("\nJPEG_END");
+    esp_camera_fb_return(frame);
 }
 
 bool initInference()

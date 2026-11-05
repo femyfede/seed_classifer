@@ -55,14 +55,7 @@
 #define CLASSIFICATION_SAMPLES 3
 
 // Time between individual classification samples.
-#define SAMPLE_GAP_MS 250
-
-// Gives the user time to position the seed and allows
-// the camera exposure to adjust to the changed scene.
-#define SEED_POSITION_DELAY_MS 1500
-
-// Time the final prediction remains visible on the LCD.
-#define INFERENCE_INTERVAL_MS 3000
+#define SAMPLE_GAP_MS 0
 
 // =====================================================
 // Camera warm-up configuration

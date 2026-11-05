@@ -12,4 +12,7 @@ struct PredictionResult {
 bool initInference();
 PredictionResult runSeedInference();
 
+// Debug: send 'p' over serial to receive the current camera frame as hex JPEG.
+void dumpFrameIfRequested();
+
 #endif

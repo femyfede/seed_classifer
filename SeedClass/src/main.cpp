@@ -137,33 +137,12 @@ void setup()
 
 void loop()
 {
-    displayLcdMessage(
-        "Hold Seed Still",
-        "Preparing..."
-    );
-
-    // Give the camera time to adjust to the new seed.
-    delay(SEED_POSITION_DELAY_MS);
-
-    displayLcdMessage(
-        "Scanning Seed",
-        "Samples: 1-3"
-    );
+    dumpFrameIfRequested();
 
     PredictionResult result =
         getStablePrediction();
 
     displayPrediction(result);
-
-    // Keep the result visible.
-    delay(INFERENCE_INTERVAL_MS);
-
-    displayLcdMessage(
-        "Place Seed",
-        "Under Camera"
-    );
-
-    delay(1000);
 }
 
 // =====================================================
