@@ -34,6 +34,10 @@
 #define COLOR_SEED_YELLOWNESS 0.20f
 #define COLOR_MIN_BRIGHTNESS 90
 
+// Seed pixels need red >= this * green. Kernels measure 1.06+, green
+// backgrounds ~0.45, so green objects are not mistaken for seed.
+#define COLOR_MIN_RED_GREEN 0.85f
+
 // A seed pixel counts as "yellow" at or above this yellowness.
 #define COLOR_YELLOW_YELLOWNESS 0.55f
 

@@ -96,6 +96,7 @@ static PredictionResult classifyByColor(const uint8_t *bgr)
             sampled++;
 
             if (mx < COLOR_MIN_BRIGHTNESS) continue;
+            if (r < COLOR_MIN_RED_GREEN * g) continue;
 
             const float yellowness = ((r + g) * 0.5f - b) / static_cast<float>(mx);
             if (yellowness < COLOR_SEED_YELLOWNESS) continue;
