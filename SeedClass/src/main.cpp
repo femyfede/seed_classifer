@@ -268,16 +268,17 @@ static String getSeedRegion(
     const String &label
 )
 {
+    // Tanzanian zones, matching the web app's seed guide (16-char LCD).
     if (label.equalsIgnoreCase("Asili")) {
-        return "Central/E.Kenya";
+        return "TZ: S/N Highland";
     }
 
     if (label.equalsIgnoreCase("Chotara")) {
-        return "W.Kenya";
+        return "TZ: Rainy zones";
     }
 
     if (label.equalsIgnoreCase("Huria")) {
-        return "Rift Valley";
+        return "TZ: All zones";
     }
 
     return "";
@@ -288,15 +289,15 @@ static String getSeedSoil(
 )
 {
     if (label.equalsIgnoreCase("Asili")) {
-        return "Sandy loam";
+        return "Sandy loam soil";
     }
 
     if (label.equalsIgnoreCase("Chotara")) {
-        return "Loam/clay";
+        return "Rich loam soil";
     }
 
     if (label.equalsIgnoreCase("Huria")) {
-        return "Volcanic";
+        return "Loam soil";
     }
 
     return "";
@@ -320,7 +321,7 @@ static void displayPrediction(
             confidenceLine
         );
 
-        delay(3000);
+        delay(RESULT_SCREEN_MS);
         return;
     }
 
@@ -346,26 +347,17 @@ static void displayPrediction(
         confidenceLine
     );
 
-    delay(3000);
+    delay(RESULT_SCREEN_MS);
 
     String region = getSeedRegion(normalized);
 
     if (region.length() > 0) {
         displayLcdMessage(
-            "Region:",
-            region
+            region,
+            getSeedSoil(normalized)
         );
 
-        delay(3000);
-
-        String soil = getSeedSoil(normalized);
-
-        displayLcdMessage(
-            "Soil Type:",
-            soil
-        );
-
-        delay(3000);
+        delay(RESULT_SCREEN_MS);
     }
 }
 

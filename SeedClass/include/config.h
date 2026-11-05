@@ -57,6 +57,9 @@
 // Time between individual classification samples.
 #define SAMPLE_GAP_MS 0
 
+// How long each result screen (class, then region + soil) stays on the LCD.
+#define RESULT_SCREEN_MS 1500
+
 // =====================================================
 // Camera warm-up configuration
 // =====================================================
