@@ -122,7 +122,7 @@ bool initCamera()
     // Basic image settings.
     sensor->set_brightness(sensor, 0);
     sensor->set_contrast(sensor, 0);
-    sensor->set_saturation(sensor, 0);
+    sensor->set_saturation(sensor, CLASSIFIER_USE_COLOR ? 2 : 0);
     sensor->set_sharpness(sensor, 0);
 
     // Automatic camera controls.

@@ -44,15 +44,14 @@ static int getImageData(
 
     size_t byteIndex = offset * IMAGE_CHANNELS;
 
-    // fmt2rgb888() writes pixels in B, G, R order.
     for (size_t index = 0; index < length; index++) {
-        const uint8_t blue =
+        const uint8_t red =
             modelWorkingBuffer[byteIndex];
 
         const uint8_t green =
             modelWorkingBuffer[byteIndex + 1];
 
-        const uint8_t red =
+        const uint8_t blue =
             modelWorkingBuffer[byteIndex + 2];
 
         outputPtr[index] = static_cast<float>(
@@ -76,7 +75,7 @@ static float clamp01(float value)
 
 // Classifies by kernel colour: yellow kernels -> Asili, white/cream -> Chotara.
 // "Yellowness" = ((R + G) / 2 - B) / max(R, G, B); plain white cloth is ~0.03.
-static PredictionResult classifyByColor(const uint8_t *bgr)
+static PredictionResult classifyByColor(const uint8_t *rgb)
 {
     PredictionResult prediction;
     prediction.label = "unknown";
@@ -91,8 +90,8 @@ static PredictionResult classifyByColor(const uint8_t *bgr)
 
     for (uint32_t y = 0; y < RAW_IMAGE_HEIGHT; y += 2) {
         for (uint32_t x = 0; x < RAW_IMAGE_WIDTH; x += 2) {
-            const uint8_t *p = bgr + (y * RAW_IMAGE_WIDTH + x) * IMAGE_CHANNELS;
-            const int b = p[0], g = p[1], r = p[2];
+            const uint8_t *p = rgb + (y * RAW_IMAGE_WIDTH + x) * IMAGE_CHANNELS;
+            const int r = p[0], g = p[1], b = p[2];
             const int mx = max(r, max(g, b));
             sampled++;
             frameR += r; frameG += g; frameB += b;
