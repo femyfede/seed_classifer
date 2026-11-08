@@ -92,14 +92,14 @@ export const TRANSLATIONS = {
 
     scanTitle: "Scan maize seeds",
     scanSubtitle:
-      "Photograph one maize kernel clearly. The model identifies the seed category on your device.",
+      "For the most reliable result, photograph one clean maize kernel at a time. This is an estimate of its visual seed category, not an exact variety identification or proof of seed quality.",
     modelReady: "Model ready",
     modelLoading: "Loading AI model…",
     modelFailed: "Model unavailable",
     modelLocal: "Runs locally",
     cameraStart: "Use camera",
     cameraHint:
-      "Place one kernel on a plain, contrasting surface. Fill most of the frame with the seed.",
+      "Place one clean, dry kernel on a plain, contrasting surface. Center the whole kernel in the frame, use even light, and capture only when it is sharp. Scan kernels separately.",
     capturePhoto: "Capture photo",
     switchCamera: "Switch camera",
     closeCamera: "Close camera",
@@ -109,11 +109,11 @@ export const TRANSLATIONS = {
     takePhotoFallback: "Take photo",
     chooseAnother: "Choose another",
     uploadTitle: "Add a seed photo",
-    uploadBody: "Take a photo now or choose one already saved on your phone.",
+    uploadBody: "Take or choose a close-up photo of one clean maize kernel. Scan each kernel separately.",
     dragDrop: "You can also drag and drop an image here on a computer.",
     previewTitle: "Ready to identify",
     previewHint:
-      "Check that the seed is clear and in focus before running the model.",
+      "Before identifying, check that one whole kernel is centered, sharp, and well lit, with no other kernels in the photo. Retake a blurry or dark photo.",
     previewAlt: "Selected maize seed photo",
     identifySeeds: "Identify Seeds",
     identifyAgain: "Identify again",
@@ -124,11 +124,11 @@ export const TRANSLATIONS = {
     predictedClass: "Seed category",
     confidence: "Model confidence",
     confidenceDisclaimer:
-      "This is the model's confidence, not proof that a seed is genuine, certified or safe to plant.",
+      "This is an estimate based on appearance. Model confidence is not proof of the exact variety, authenticity, certification or planting quality.",
     lowConfidence:
-      "Confidence is low. Try another photo with one seed, better light and a plain background.",
+      "The model is unsure. Retake a close, sharp photo of one kernel with better light and a plain background.",
     photoTip:
-      "For best results: use clear lighting, a plain contrasting background, one seed in sharp focus, and consider scanning multiple seeds for comparison.",
+      "For best results, photograph one clean, dry kernel at a time. Keep the whole kernel sharp and centered on a plain, contrasting background with even light. Scan other kernels in separate photos.",
     lowConfidenceExplainer:
       "The model is uncertain about this seed. Try photographing with better lighting or a clearer background.",
     retryPhotography: "Retry with better photo",
@@ -151,10 +151,10 @@ export const TRANSLATIONS = {
     notSaved: "Result not saved",
 
     tipsTitle: "Tips for a better scan",
-    tip1: "Use one maize kernel, not a handful.",
-    tip2: "Use a plain background that contrasts with the seed.",
-    tip3: "Use even daylight and avoid deep shadows.",
-    tip4: "Hold the phone steady and let the seed fill the frame.",
+    tip1: "Photograph one clean, dry kernel at a time; scan other kernels separately.",
+    tip2: "Use a plain, non-shiny background that contrasts with the seed.",
+    tip3: "Use bright, even light; avoid shadows and glare.",
+    tip4: "Keep the whole kernel in frame, hold steady, and make sure it is in focus.",
     scanPrivacy:
       "The image is processed on this device. It is not uploaded to a server.",
     directCameraNote:
@@ -435,14 +435,14 @@ export const TRANSLATIONS = {
 
     scanTitle: "Pima mbegu za mahindi",
     scanSubtitle:
-      "Piga picha ya mbegu moja ya mahindi kwa uwazi. Modeli inatambua aina ya mbegu kwenye kifaa chako.",
+      "Kwa matokeo ya kuaminika zaidi, piga picha ya punje moja safi ya mahindi kwa kila picha. Matokeo ni makadirio ya kundi lake kwa mwonekano, si utambuzi wa aina halisi au uthibitisho wa ubora wa mbegu.",
     modelReady: "Modeli iko tayari",
     modelLoading: "Inapakia modeli ya AI…",
     modelFailed: "Modeli haipatikani",
     modelLocal: "Inafanya kazi hapa",
     cameraStart: "Tumia kamera",
     cameraHint:
-      "Weka mbegu moja kwenye uso tambarare wenye rangi tofauti. Jaza sehemu kubwa ya picha kwa mbegu.",
+      "Weka punje moja safi na kavu kwenye uso usio na michoro na wenye rangi tofauti. Iweke katikati ionekane nzima, tumia mwanga sawa, na piga picha ikiwa imenyooka vizuri tu. Piga picha za punje nyingine kivyake.",
     capturePhoto: "Piga picha",
     switchCamera: "Badilisha kamera",
     closeCamera: "Funga kamera",
@@ -452,11 +452,11 @@ export const TRANSLATIONS = {
     takePhotoFallback: "Piga picha",
     chooseAnother: "Chagua nyingine",
     uploadTitle: "Ongeza picha ya mbegu",
-    uploadBody: "Piga picha sasa au chagua picha iliyohifadhiwa kwenye simu yako.",
+    uploadBody: "Piga au chagua picha ya karibu ya punje moja safi ya mahindi. Pima kila punje kivyake.",
     dragDrop: "Kwenye kompyuta unaweza pia kuburuta na kuangusha picha hapa.",
     previewTitle: "Tayari kupima",
     previewHint:
-      "Hakikisha mbegu iko wazi na inaonekana vyema kabla ya kuanzisha modeli.",
+      "Kabla ya kuanza, hakikisha punje nzima iko katikati, inaonekana wazi na ina mwanga wa kutosha, bila punje nyingine kwenye picha. Piga tena ikiwa picha imefifia au ni nyeusi.",
     previewAlt: "Picha ya mbegu ya mahindi iliyochaguliwa",
     identifySeeds: "Tambua Mbegu",
     identifyAgain: "Tambua tena",
@@ -467,13 +467,13 @@ export const TRANSLATIONS = {
     predictedClass: "Aina ya mbegu",
     confidence: "Uhakika wa modeli",
     confidenceDisclaimer:
-      "Huu ni uhakika wa modeli, si uthibitisho kuwa mbegu ni halisi, imethibitishwa au salama kupandwa.",
+      "Haya ni makadirio kutokana na mwonekano. Uhakika wa modeli si uthibitisho wa aina halisi, uhalali, uthibitisho rasmi au ubora wa kupanda.",
     lowConfidence:
-      "Uhakika ni mdogo. Jaribu picha nyingine yenye mbegu moja, mwanga bora na mandhari tambarare.",
+      "Modeli haina uhakika. Piga tena picha ya karibu na iliyo wazi ya punje moja kwa mwanga bora na mandhari tambarare.",
     lowConfidenceExplainer:
       "Modeli si hakika kuhusu mbegu hii. Jaribu kupiga picha kwa mwanga bora au mandhari safi.",
     photoTip:
-      "Kwa matokeo bora: tumia mwanga safi, mandhari tambarare yanayokamatia, mbegu moja iliyozingatiwa vizuri, na fikiria kupiga picha ya mbegu kadhaa kwa kulinganisha.",
+      "Kwa matokeo bora, piga picha ya punje moja safi na kavu kwa kila picha. Punje nzima iwe katikati na ionekane wazi, kwenye mandhari tambarare yenye rangi tofauti na mwanga sawa. Piga picha za punje nyingine kivyake.",
     retryPhotography: "Jaribu tena na picha nzuri",
     classProbabilities: "Alama za aina zote",
     resultImageAlt: "Picha iliyotumika kwa utambuzi huu",
@@ -494,10 +494,10 @@ export const TRANSLATIONS = {
     notSaved: "Matokeo hayakuhifadhiwa",
 
     tipsTitle: "Vidokezo vya kupima vizuri",
-    tip1: "Tumia mbegu moja ya mahindi, si kiganja kimoja.",
-    tip2: "Tumia mandhari tambarare yenye rangi tofauti na mbegu.",
-    tip3: "Tumia mwanga wa mchana uliosawa na uepuke vivuli vizito.",
-    tip4: "Shikilia simu kwa utulivu na uache mbegu ijaze picha.",
+    tip1: "Piga picha ya punje moja safi na kavu kila mara; pima punje nyingine kivyake.",
+    tip2: "Tumia mandhari tambarare lisilo na mng'ao na lenye rangi tofauti na punje.",
+    tip3: "Tumia mwanga mkali na sawa; epuka vivuli na mng'ao.",
+    tip4: "Hakikisha punje nzima iko ndani ya picha, shikilia simu bila kutikisika na uweke picha wazi.",
     scanPrivacy:
       "Picha inachambuliwa kwenye kifaa hiki. Haipakiwi kwenye seva.",
     directCameraNote:
