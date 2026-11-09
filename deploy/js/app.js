@@ -166,6 +166,7 @@ const state = {
     stage: "empty",
     image: null,
     imageDataUrl: "",
+    isSampleImage: false,
     result: null,
     errorKey: "",
     cameraErrorKey: "",
@@ -626,6 +627,12 @@ function renderScan() {
     }
   }
 
+  if (state.scan.stage === "preview") {
+    $("previewHint").textContent = t(
+      state.scan.isSampleImage ? "sampleImagePreviewHint" : "previewHint"
+    );
+  }
+
   if (state.scan.stage === "camera") paintCameraState();
   if (state.scan.stage === "error") renderScanError();
   if (state.scan.stage === "result") renderResult();
@@ -719,7 +726,7 @@ function retryScan() {
   if (key === "errorModel") ensureModel(true);
 }
 
-async function setImage(dataUrl) {
+async function setImage(dataUrl, isSampleImage = false) {
   let image;
   try {
     image = await loadImageElement(dataUrl);
@@ -731,6 +738,10 @@ async function setImage(dataUrl) {
   stopCamera();
   state.scan.image = image;
   state.scan.imageDataUrl = dataUrl;
+  state.scan.isSampleImage = isSampleImage;
+  $("previewHint").textContent = t(
+    isSampleImage ? "sampleImagePreviewHint" : "previewHint"
+  );
   state.scan.result = null;
   state.scan.errorKey = "";
   state.scan.cameraErrorKey = "";
@@ -757,10 +768,37 @@ async function handleFile(file) {
   }
 }
 
+async function loadSampleImage(path) {
+  const grid = $("sampleImageGrid");
+  grid.setAttribute("aria-busy", "true");
+  grid.querySelectorAll("button").forEach((button) => {
+    button.disabled = true;
+  });
+
+  try {
+    const response = await fetch(new URL(path, import.meta.url));
+    if (!response.ok) {
+      throw new Error(`Sample image request failed: ${response.status}`);
+    }
+
+    const result = await fileToDataUrl(await response.blob());
+    await setImage(result.dataUrl, true);
+  } catch (error) {
+    console.error("Seed sample image failed to load:", error);
+    showScanError("errorSampleImage");
+  } finally {
+    grid.removeAttribute("aria-busy");
+    grid.querySelectorAll("button").forEach((button) => {
+      button.disabled = false;
+    });
+  }
+}
+
 function resetScan() {
   stopCamera();
   state.scan.image = null;
   state.scan.imageDataUrl = "";
+  state.scan.isSampleImage = false;
   state.scan.result = null;
   state.scan.errorKey = "";
   state.scan.cameraErrorKey = "";
@@ -1700,6 +1738,10 @@ function bindEvents() {
 
   $("cameraStartBtn").addEventListener("click", openCamera);
   $("galleryBtn").addEventListener("click", () => $("fileInput").click());
+  $("sampleImageGrid").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-sample-image]");
+    if (button) loadSampleImage(button.dataset.sampleImage);
+  });
   $("changeImageBtn").addEventListener("click", () => $("fileInput").click());
   $("scanErrorUploadBtn").addEventListener("click", () => $("fileInput").click());
   $("cameraUploadBtn").addEventListener("click", () => $("fileInput").click());

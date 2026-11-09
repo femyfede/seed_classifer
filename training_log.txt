@@ -1,0 +1,18 @@
+Device: cpu
+Classes (4): ['chotara', 'huria', 'local', 'other']
+Loading data...
+  Loading chotara: 4958 images...
+  Loading huria: 4621 images...
+  Loading local: 4776 images...
+  Loading other: 6000 images...
+Dataset: (20355, 80, 80, 3), counts: [4958, 4621, 4776, 6000] (217s)
+Added 3000 synthetic OOD negatives to 'other' (train only).
+Split (group-aware=True): train=17101, val=2199, test=4055, unique seeds=6127 (train 4288, val 613, test 1226)
+Traceback (most recent call last):
+  File "C:\Users\FEDE\OneDrive\Desktop\seedclassifer\train_model.py", line 542, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\FEDE\OneDrive\Desktop\seedclassifer\train_model.py", line 449, in main
+    class_counts = np.bincount(train_labels, minlength=len(classes))
+                               ^^^^^^^^^^^^
+NameError: name 'train_labels' is not defined. Did you mean: 'train_loader'?

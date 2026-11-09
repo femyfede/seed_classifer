@@ -1012,6 +1012,64 @@ h3 {
   min-width: 140px;
 }
 
+.sample-photo-section {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.sample-photo-section h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.sample-photo-section .micro {
+  margin-top: 0;
+}
+
+.sample-photo-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.sample-photo-button {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  color: var(--forest);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 650;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sample-photo-button:hover {
+  border-color: var(--green-soft);
+  background: var(--sage);
+}
+
+.sample-photo-button:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+}
+
+.sample-photo-button img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: calc(var(--radius-md) - 4px);
+  object-fit: cover;
+}
+
 .micro {
   margin: 0.2rem auto 0;
   max-width: 55ch;

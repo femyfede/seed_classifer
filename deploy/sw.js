@@ -1,5 +1,5 @@
 /* Seed Classifier offline service worker — relative paths support subdirectory hosting. */
-const CACHE_VERSION = "seedyai-v1.0.9";
+const CACHE_VERSION = "seedyai-v1.0.11";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -23,6 +23,9 @@ const CORE_ASSETS = [
   "./assets/img/seed-asili.jpg",
   "./assets/img/seed-chotara.jpg",
   "./assets/img/seed-huria.jpg",
+  "./assets/img/sample-seeds-asili.jpg",
+  "./assets/img/sample-seeds-chotara.jpg",
+  "./assets/img/sample-seeds-huria.jpg",
   "./assets/img/scan-illustration.svg",
   "./assets/img/empty-history.svg",
   "./assets/icons/favicon.svg",

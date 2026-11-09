@@ -216,6 +216,24 @@
                   <span data-i18n="gallery">Choose photo</span>
                 </button>
               </div>
+              <section class="sample-photo-section" aria-labelledby="sampleImagesTitle">
+                <h3 id="sampleImagesTitle" data-i18n="sampleImagesTitle">Or try a sample photo</h3>
+                <p class="micro" data-i18n="sampleImagesBody">Each example shows four kernels together. These are for trying the scan flow only: the model was trained on one kernel per photo, so results may be unreliable.</p>
+                <div class="sample-photo-options" id="sampleImageGrid">
+                  <button class="sample-photo-button" type="button" data-sample-image="../assets/img/sample-seeds-asili.jpg">
+                    <img src="./assets/img/sample-seeds-asili.jpg" alt="" loading="lazy">
+                    <span data-i18n="sampleAsili">Asili example</span>
+                  </button>
+                  <button class="sample-photo-button" type="button" data-sample-image="../assets/img/sample-seeds-chotara.jpg">
+                    <img src="./assets/img/sample-seeds-chotara.jpg" alt="" loading="lazy">
+                    <span data-i18n="sampleChotara">Chotara example</span>
+                  </button>
+                  <button class="sample-photo-button" type="button" data-sample-image="../assets/img/sample-seeds-huria.jpg">
+                    <img src="./assets/img/sample-seeds-huria.jpg" alt="" loading="lazy">
+                    <span data-i18n="sampleHuria">Huria example</span>
+                  </button>
+                </div>
+              </section>
               <p class="micro" data-i18n="dragDrop">You can also drag and drop an image here on a computer.</p>
               <p class="micro" data-i18n="directCameraNote">Direct camera access needs HTTPS or localhost. You can always upload a photo instead.</p>
               <input type="file" id="fileInput" accept="image/*" hidden>
@@ -256,7 +274,7 @@
               </div>
               <div class="scan-intro">
                 <h2 class="stage-title" data-i18n="previewTitle">Ready to identify</h2>
-                <p class="stage-text" data-i18n="previewHint">Before identifying, check that one whole kernel is centered, sharp, and well lit, with no other kernels in the photo. Retake a blurry or dark photo.</p>
+                <p class="stage-text" id="previewHint" data-i18n="previewHint">Before identifying, check that one whole kernel is centered, sharp, and well lit, with no other kernels in the photo. Retake a blurry or dark photo.</p>
               </div>
               <div class="scan-actions">
                 <button class="btn btn-primary btn-lg" id="identifyBtn" type="button">

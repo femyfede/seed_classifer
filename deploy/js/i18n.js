@@ -110,6 +110,16 @@ export const TRANSLATIONS = {
     chooseAnother: "Choose another",
     uploadTitle: "Add a seed photo",
     uploadBody: "Take or choose a close-up photo of one clean maize kernel. Scan each kernel separately.",
+    sampleImagesTitle: "Or try a sample photo",
+    sampleImagesBody:
+      "Each example shows four kernels together. These are for trying the scan flow only: the model was trained on one kernel per photo, so results may be unreliable.",
+    sampleAsili: "4-kernel Asili sample",
+    sampleChotara: "4-kernel Chotara sample",
+    sampleHuria: "4-kernel Huria sample",
+    sampleImagePreviewHint:
+      "This sample contains four kernels together to demonstrate the scan flow. The model was trained on one kernel per photo, so this result may be unreliable.",
+    errorSampleImage:
+      "We could not load that sample photo. Try another sample or choose your own photo.",
     dragDrop: "You can also drag and drop an image here on a computer.",
     previewTitle: "Ready to identify",
     previewHint:
@@ -453,6 +463,16 @@ export const TRANSLATIONS = {
     chooseAnother: "Chagua nyingine",
     uploadTitle: "Ongeza picha ya mbegu",
     uploadBody: "Piga au chagua picha ya karibu ya punje moja safi ya mahindi. Pima kila punje kivyake.",
+    sampleImagesTitle: "Au jaribu picha ya mfano",
+    sampleImagesBody:
+      "Kila mfano una punje nne pamoja. Picha hizi ni za kujaribu hatua za upimaji tu: modeli ilifunzwa kwa punje moja kwa picha, hivyo matokeo yanaweza yasiaminike.",
+    sampleAsili: "Mfano wa punje 4: Asili",
+    sampleChotara: "Mfano wa punje 4: Chotara",
+    sampleHuria: "Mfano wa punje 4: Huria",
+    sampleImagePreviewHint:
+      "Mfano huu una punje nne pamoja ili kuonyesha hatua za upimaji. Modeli ilifunzwa kwa punje moja kwa picha, hivyo matokeo haya yanaweza yasiaminike.",
+    errorSampleImage:
+      "Picha hii ya mfano haikuweza kupakiwa. Jaribu mfano mwingine au chagua picha yako.",
     dragDrop: "Kwenye kompyuta unaweza pia kuburuta na kuangusha picha hapa.",
     previewTitle: "Tayari kupima",
     previewHint:
